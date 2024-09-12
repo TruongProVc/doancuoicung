@@ -1,0 +1,184 @@
+﻿@using PagedList.Mvc;
+@using PagedList;
+@model IPagedList<BanGiay.Models.SanPham>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .size-box {
+        display: inline-block;
+        margin: 5px;
+        padding: 10px 15px;
+        border: 2px solid #ccc;
+        border-radius: 8px;
+        background-color: #f9f9f9;
+        color: #333;
+        text-align: center;
+        text-decoration: none;
+        transition: all 0.3s ease;
+    }
+
+        .size-box:hover {
+            background-color: #ddd;
+            border-color: #888;
+            color: #000;
+        }
+</style>
+
+<div class="breadcrumb-section breadcrumb-nav-color--black">
+    <div class="breadcrumb-wrapper">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <h3 class="breadcrumb-title">Tất cả sản phẩm</h3>
+                    <div class="breadcrumb-nav breadcrumb-nav-color--black">
+                        <nav aria-label="breadcrumb">
+                            <ul>
+                                <li><a href="#">Trang chủ</a></li>
+                                <li class="active" aria-current="page">Tất cả sản phẩm</li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="shop-section">
+    <div class="container">
+        <div class="row flex-column-reverse flex-lg-row">
+            <!-- Sidebar để lọc thương hiệu -->
+            <div class="col-lg-3">
+                <div class="siderbar-section" data-aos="fade-up" data-aos-delay="0">
+                    <div class="sidebar-single-widget">
+                        <h6 class="sidebar-title">Thương hiệu</h6>
+                        <div class="sidebar-content">
+                            <ul class="sidebar-menu">
+                                <!-- Liên kết quay về tất cả sản phẩm -->
+                                <li>
+                                    <a href="#" id="show-all-products">Tất cả sản phẩm</a>
+                                </li>
+                                <!-- Hiển thị tất cả thương hiệu -->
+                                @foreach (var thuongHieu in ViewBag.ThHieu)
+                                {
+                                    <li>
+                                        <a href="#" class="filter-link" data-maThuongHieu="@thuongHieu.maTH">
+                                            @thuongHieu.tenTH
+                                        </a>
+                                    </li>
+                                }
+                            </ul>
+                        </div>
+                    </div> <!-- End Single Sidebar Widget -->
+
+                    <div class="sidebar-single-widget">
+                        <h6 class="sidebar-title">Lọc giá tiền</h6>
+                        <div class="sidebar-content">
+                            <div id="slider-range"></div>
+                            <div class="filter-type-price">
+                                <label for="amount">Khoảng giá:</label>
+                                <input type="text" id="amount" readonly>
+                            </div>
+                        </div>
+                    </div> <!-- End Single Sidebar Widget -->
+                    <!-- Start Single Sidebar Widget -->
+                    <div class="sidebar-single-widget">
+                        <h6 class="sidebar-title">Size giày</h6>
+                        <div class="sidebar-content">
+                            <div class="tag-link">
+                                @foreach (var size in ViewBag.Sizes)
+                                {
+                                    <a href="#" class="size-filter-link size-box" data-size="@size.size">@size.size</a>
+                                }
+                            </div>
+                        </div>
+                    </div> <!-- End Single Sidebar Widget -->
+                </div> <!-- End Sidebar Area -->
+            </div>
+
+            <!-- Hiển thị danh sách sản phẩm -->
+            <div class="col-lg-9">
+                <div id="product-list">
+                    @Html.Partial("_ProductListPartial", Model)
+                </div>
+                <div class="pagination-container">
+                    @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            // Handle brand filtering
+            $('.filter-link').on('click', function (e) {
+                e.preventDefault();
+                var maThuongHieu = $(this).data('mathuonghieu');
+                $.ajax({
+                    url: '@Url.Action("LoadProducts")',
+                    data: { maThuongHieu: maThuongHieu },
+                    success: function (result) {
+                        $('#product-list').html(result);
+                    }
+                });
+            });
+
+            // Show all products
+            $('#show-all-products').on('click', function (e) {
+                e.preventDefault();
+                $.ajax({
+                    url: '@Url.Action("LoadProducts")',
+                    data: { maThuongHieu: null },
+                    success: function (result) {
+                        $('#product-list').html(result);
+                    }
+                });
+            });
+
+            // Price filtering
+            $("#slider-range").slider({
+                range: true,
+                min: 0,
+                max: 20000000, // Adjust as needed
+                values: [0, 20000000], // Initial range
+                slide: function (event, ui) {
+                    $("#amount").val(ui.values[0].toLocaleString('vi-VN') + "₫ - " + ui.values[1].toLocaleString('vi-VN') + "₫");
+
+                    // AJAX request to load products based on the selected price range
+                    $.ajax({
+                        url: '@Url.Action("LoadProductsByPriceRange")',
+                        data: { minPrice: ui.values[0], maxPrice: ui.values[1] },
+                        success: function (result) {
+                            $('#product-list').html(result);
+                        }
+                    });
+                }
+            });
+
+            // Set initial amount
+            $("#amount").val($("#slider-range").slider("values", 0).toLocaleString('vi-VN') + "₫ - " +
+                $("#slider-range").slider("values", 1).toLocaleString('vi-VN') + "₫");
+
+            // Handle size filtering
+            $('.size-filter-link').on('click', function (e) {
+                e.preventDefault();
+                var size = $(this).data('size');
+                $.ajax({
+                    url: '@Url.Action("FilterBySize")',
+                    data: { size: size },
+                    success: function (result) {
+                        $('#product-list').html(result);
+                    }
+                });
+            });
+        });
+    </script>
+}

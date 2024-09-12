@@ -1,0 +1,401 @@
+@import url("https://fonts.googleapis.com/css?family=Lato&display=swap");
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #242333;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "Lato", sans-serif;
+    margin: 0;
+}
+
+.movie {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.movie-container select {
+    background-color: #fff;
+    border: 0;
+    border-radius: 5px;
+    font-size: 16px;
+    margin-left: 10px;
+    padding: 5px 15px 5px 15px;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
+}
+/* .container {
+  perspective: 1000px;
+  margin-bottom: 30px;
+} */
+.seat {
+    background-color: #d9d9d9;
+    min-height: 32px;
+    min-width: 32px;
+    margin: 8px;
+    font-size: 20px;
+    border: #678b37 solid;
+    color: black;
+    opacity: 1;
+}
+
+    .seat.selected {
+        background-color: #2a73dd;
+    }
+
+    .seat.sold {
+        background-color: #721e1e;
+    }
+
+.seat-selected {
+    background-color: #678b37;
+}
+
+
+.seat:not(.sold):hover {
+    cursor: pointer;
+    transform: scale(1.2);
+}
+
+.showcase .seat:not(.sold):hover {
+    cursor: default;
+    transform: scale(1);
+}
+
+.showcase {
+    padding: 5px 10px;
+    border-radius: 5px;
+    /* color: red; */
+    list-style-type: none;
+    display: flex;
+    justify-content: space-between;
+}
+
+.showcase {
+    border-top: rgb(27, 11, 247) solid;
+}
+
+    .showcase li {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 10px;
+    }
+
+        .showcase li small {
+            margin-left: 2px;
+            color: white;
+        }
+
+.row {
+    display: flex;
+}
+
+p.text {
+    margin: 5px 0;
+}
+
+    p.text span {
+        color: rgb(158, 248, 158);
+    }
+
+.screenwword {
+    color: rgb(128, 126, 126);
+    display: block;
+    /* padding-left:100px; */
+    padding-top: 20px;
+    text-align: center;
+}
+
+.toandien {
+    padding-top: 30px;
+    background-color: rgba(236, 236, 235, 0.1);
+    margin: 6px;
+    width: 100%;
+}
+
+.seatname {
+    position: absolute;
+    left: 95%;
+}
+
+/* css t chỉnh */
+.seatrow {
+    color: white;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+
+#buyButton {
+    background: linear-gradient(120deg, yellow, #2a73dd);
+    padding: 15.5px 46px;
+    border: none;
+    border-radius: 8px;
+    letter-spacing: 0.03rem;
+    font-size: 14px;
+    font-weight: 600;
+    color: #fff;
+    transition: .5s;
+    cursor: pointer;
+}
+
+    #buyButton:hover {
+        opacity: 1;
+    }
+
+.btncontainer {
+    display: flex;
+    margin: auto;
+    width: 25%;
+}
+
+.topcol {
+    display: flex;
+    background-color: rgba(255, 255, 255, 0.1);
+    margin: 6px;
+    width: 100%;
+    padding-top: 20px;
+    color: #d9d9d9;
+}
+
+@media screen and (max-width: 768px) {
+    .topcol {
+        flex-wrap: wrap;
+    }
+
+    .btnchange {
+        flex-basis: calc(10% - 100px); /* Display buttons in two columns on mobile */
+    }
+}
+
+.topcol {
+    display: flex;
+    justify-content: left;
+}
+
+    .topcol div {
+        padding: 0 20px;
+    }
+
+    .topcol p {
+        margin: 5px;
+    }
+
+.pay {
+    border-top: black solid;
+    width: 100%;
+}
+
+.bothbtn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.pay h5 {
+    color: white;
+    font-size: 20px;
+}
+
+#bookingInfo {
+    height: 100px;
+}
+
+#bookingDetails {
+    height: 100px;
+    color: white;
+}
+
+.THONGTIN2 {
+    color: aliceblue
+}
+
+.THONGTIN img {
+    position: absolute;
+    width: 170px;
+    top: 0;
+    left: 0;
+    margin: 10px;
+}
+
+.THONGTIN {
+    background-color: rgba(236, 236, 235, 0.1);
+    position: absolute;
+    padding: 300px 250px;
+    margin: 6px;
+    top: 80px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.movie-title {
+    color: white;
+    position: absolute;
+    clear: 0;
+    font-size: 30px;
+    top: 20px;
+    right: 60px;
+    text-align: center;
+    word-wrap: break-word; /* Tự động xuống dòng khi hết chữ */
+    width: 250px;
+    padding-top: 20px;
+    padding-left: 10px;
+    font-weight: bold;
+}
+
+.cinema-address {
+    color: white;
+    position: absolute;
+    bottom: 0;
+    top: 290px;
+    left: 0;
+    text-align: left;
+    padding-bottom: 10px;
+    margin: 10px;
+    font-size: 20px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.movie-detail {
+    color: white;
+    font-size: 20px;
+    position: absolute;
+    bottom: 0;
+    top: 330px;
+    left: 0;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    text-align: left;
+    padding-bottom: 10px;
+    margin: 10px;
+}
+
+.dashed-line {
+    position: absolute;
+    border-top: 1px dashed #ccc; /* Màu và kiểu nét đứt của đường kẻ */
+    width: 100%;
+    bottom: 0;
+    top: 400px;
+    left: 0;
+}
+
+#bookingDetails {
+    height: 100px;
+    color: white;
+    position: absolute;
+    bottom: 0;
+    top: 450px;
+    right: 30px;
+    font-size: 20px;
+}
+
+
+@media screen and (max-width:2000px) {
+    .THONGTIN .THONGTIN__IMG img {
+        width: 100px;
+    }
+}
+
+@media screen and (max-width:1238px) {
+    .THONGTIN .THONGTIN__IMG img {
+        width: 200px;
+    }
+}
+
+@media screen and (max-width:912px) {
+    .bothbtn .btncontainer {
+        width: 50%;
+    }
+}
+
+@media screen and (max-width: 856px) {
+    .col-md-5 .col-5 img {
+        width: 200px;
+        height: 250px;
+    }
+
+    .bothbtn .btncontainer {
+        margin: 13.5px 11px;
+    }
+}
+
+.btnchange {
+    padding: 7px;
+    margin-bottom: 15px;
+    margin-right: 10px;
+}
+
+    .btnchange.selected {
+        background-color: #2a73dd;
+    }
+
+@media screen and (max-width: 767px) {
+    /* Thêm những điều chỉnh dành cho thiết bị di động ở đây */
+    .THONGTIN {
+        padding: 300px 212px; /* Điều chỉnh padding */
+    }
+
+    .movie-title {
+        width: 100px; /* Điều chỉnh kích thước tiêu đề */
+    }
+
+    #bookingDetails {
+        top: 450px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .btnchange-day {
+        flex-basis: calc(50% - 10px);
+    }
+}
+
+.btnchange-day {
+    background-color: white;
+    padding: 10px;
+    margin: 18px;
+}
+
+    .btnchange-day.selected {
+        background-color: #2a73dd;
+    }
+
+.topcol-day {
+    display: flex;
+    position: relative;
+    background-color: rgba(255, 255, 255, 0.1);
+    margin: 6px;
+    width: 100%;
+    padding-top: 1px;
+    color: #d9d9d9;
+}
+
+@media screen and (max-width: 768px) {
+    .topcol-day {
+        flex-wrap: wrap;
+    }
+
+    .btnchange-day {
+        flex-basis: calc(30% - 30px);
+    }
+}
+
+.btnchange-payment {
+    position: absolute;
+    top: 530px;
+    background-color: #2a73dd;
+    color: white;
+    right: 50px;
+    margin: 10px;
+    padding: 10px;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}

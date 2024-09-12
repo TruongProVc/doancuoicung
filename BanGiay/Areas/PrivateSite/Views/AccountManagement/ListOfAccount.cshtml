@@ -1,0 +1,184 @@
+﻿@{
+    ViewBag.Title = "ListOfAccount";
+}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12 d-flex align-items-stretch">
+            <div class="card w-100">
+                <div class="card-body p-4">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6">
+                            <h5 class="card-title fw-600 mb-4">Quản lý tài khoản</h5>
+                        </div>
+                        <div class="col-lg-6 col-md-6">
+                            <input class="form-control" id="searchAccount" placeholder="Tìm kiếm ..." />
+                        </div>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-post text-nowrap mb-0 align-middle">
+                            <thead class="text-dark fs-4">
+                                <tr>
+                                    <th class="">
+                                        <h6 class="fw-600 mb-0">Email</h6>
+                                    </th>
+                                    <th class="">
+                                        <h6 class="fw-600 mb-0">Họ tên</h6>
+                                    </th>
+                                    <th class="">
+                                        <h6 class="fw-600 mb-0">Nhóm tài khoản</h6>
+                                    </th>
+                                    <th class="">
+                                        <h6 class="fw-600 mb-0">Lệnh</h6>   
+                                    </th>
+                                    <th class="">
+                                        <h6 class="fw-600 mb-0">Trang thái</h6>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody id="table_AccountManagement"></tbody>
+                        </table>
+                        <div id="messageNotFind" style="margin:auto;display:none; text-align:center;">Không tìm thấy</div>
+                    </div>
+                    <div id="loading" class=" m-auto  mt-4"></div>
+                </div>
+                <div class="card-tools p-5 pt-0 pb-0 m-auto" id="pagination"></div>
+            </div>
+           
+        </div>  
+    </div>
+</div>
+@section scriptAccount{
+    <script>
+        var elementTable = $("#table_AccountManagement");
+        $(document).ready(function () {
+            loadData("",null,10);
+            $("#searchAccount").on("keyup", function (event) {
+                var keyword = $('#searchAccount').val();
+                loadData(keyword, null, 10);
+            });
+        });
+        function loadData(keyword, page, pageSize) {
+           ShowLoading(true);
+            $.ajax({
+                url: '@Url.Action("LoadData","AccountManagement")',
+                type: 'GET',
+                dataType: 'json',
+                data: { keyword: keyword, page: page, pageSize: pageSize },
+                success: function (response) {
+                    if (response.status) {
+                        ShowLoading(false);
+                        elementTable.empty();
+                        $.each(response.Data, function (index, account) {
+                            elementTable.append(`<tr>
+                                                <td><h6 class="fw-600 mb-0">${account.email}</h6></td>
+                                                <td><h6 class="fw-600 mb-0">${account.ho} ${account.ten}</h6></td>
+                                                <td><h6 class="fw-600 mb-0">${account.maNhom}</h6></td>
+                                                <td><a class="btn btn-primary" href="/PrivateSite/AccountManagement/DetailAccount?id=${account.idTaiKhoan}">Chi tiết</a>
+                                                <button type="button" class="btn btn-warning" onclick="ChangeAccountStatus(${account.idTaiKhoan},${account.sttTrangThai})">Quyền</button>
+                                                <button type="button" class="btn btn-danger m-1" onclick="Delete(${account.idTaiKhoan})">Xóa</button></td>
+                                                <td><div class="d-flex align-items-center gap-2"><span class="badge ${(account.sttTrangThai == 1 ? "bg-success" : account.sttTrangThai == 2 ? "bg-secondary" : "bg-danger")}  rounded-3 fw-600">${account.sttTrangThai == 1 ? "Hoạt động" : account.sttTrangThai == 2 ? "Chưa kích hoạt" : "Khóa"}</span></div></td>
+                                            </tr>`);
+                        });
+                        ms.style.display = "none"
+                        if ((keyword.length > 0) && (response.NumberPage == 0 && response.TotalItem == 0)) ms.style.display = "block"
+                        Pagination(keyword, response.CurrentPage, response.NumberPage, response.PageSize);
+                    } else {
+                        alert(response.message)
+                    }
+                },
+                error: function (error) {
+                    /* alert("Đã xảy ra lỗi");*/
+                    console.log(error);
+                }
+            });
+    }
+        function Delete(idAccount) {
+             Swal.fire({
+                title: "Bạn chắc chắn?",
+                text: "Bạn sẽ không thể khôi phục khi đã xóa",
+                icon: "warning",
+                showCancelButton: true,
+                cancelButtonColor: "#d33",
+                cancelButtonText: "Đóng",
+                confirmButtonColor: "#3085d6",
+                confirmButtonText: "Xóa tài khoản"
+             }).then((result) => {
+                 if (result.isConfirmed) {
+                    $.ajax({
+                        url: '@Url.Action("Delete", "AccountManagement")',
+                        type: 'POST',
+                        data: { idAccount: idAccount },
+                        success: function (response) {
+                            if (response.status) {
+                                Swal.fire({
+                                    position: "center-center",
+                                    icon: "success",
+                                    title: response.message,
+                                    showConfirmButton: true,
+                                    timer: 1500
+                                }).then((result) => {
+                                    if (result.dismiss === Swal.DismissReason.timer || result.isConfirmed) {
+                                        location.reload(true);
+                                    }
+                                });
+
+                            } else {
+                                console.log("Xóa không thành công.");
+                            }
+                        },
+                        error: function (error) {
+                            console.error(error);
+                        }
+                    });
+                }
+        });
+        }
+        async function ChangeAccountStatus(idAccount, statusCurrent) {
+            const { value: newStatus } = await Swal.fire({
+                title: "Thay đổi trạng thái tài khoản",
+                input: "select",
+                inputOptions: {
+                    1: "Hoạt động",
+                    2: "Chưa kích hoạt",
+                    3: "Khóa"
+                },
+                inputPlaceholder: "Chọn trạng thái",
+                showCancelButton: true,
+                inputValidator: async (value) => {
+                    console.log(value);
+                    if (value == statusCurrent) {
+                        return "Hãy chọn trạng thái khác";
+                    } else {
+                        return PostStatus(idAccount, value);
+                    }
+                }
+            });
+        }
+        function PostStatus (idAccount, newStatus) {
+            $.ajax({
+                url: '@Url.Action("AccountStatus", "AccountManagement")',
+                type: 'POST',
+                data: { idAccount: idAccount, newStatus: newStatus },
+                success: function (response) {
+                    if (response.status) {
+                        Swal.fire({
+                            position: "center-center",
+                            icon: "success",
+                            title: response.message,
+                            showConfirmButton: true,
+                            timer: 1500
+                        }).then((result) => {
+                            if (result.dismiss === Swal.DismissReason.timer || result.isConfirmed) {
+                                location.reload(true);
+                            }
+                        });
+                    }
+                },
+                error: function (error) {
+                    console.error(error);
+                }
+            });
+        }
+
+    </script>
+}

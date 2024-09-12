@@ -1,0 +1,52 @@
+﻿
+<html>
+<head>
+    <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:400,400i,700,900&display=swap" rel="stylesheet">
+</head>
+<style>
+    body {
+        text-align: center;
+    }
+
+    h1 {
+        color: #D9534F; /* Màu đỏ cho thông báo thất bại */
+        font-family: "Nunito Sans", "Helvetica Neue", sans-serif;
+        font-weight: 900;
+        font-size: 40px;
+        margin-bottom: 10px;
+    }
+
+    p {
+        font-family: "Nunito Sans", "Helvetica Neue", sans-serif;
+        font-size: 20px;
+        margin: 0;
+    }
+
+    .card {
+        background: white;
+        padding: 60px;
+        border-radius: 4px;
+        display: inline-block;
+        margin: 0 auto;
+    }
+
+        .card .crossmark {
+            font-size: 100px;
+            line-height: 200px;
+            margin-left: -15px;
+            color: #D9534F; /* Màu đỏ cho dấu X */
+        }
+</style>
+<body>
+    <div class="card">
+        <div style="border-radius:200px; height:200px; width:200px; background: #FDEDEC; margin:0 auto;">
+            <i class="crossmark">✗</i> <!-- Đổi dấu tích thành dấu X -->
+        </div>
+        <h1>Thanh toán thất bại</h1>
+        <p>Thanh toán không thành công. Xin vui lòng thử lại!</p> <!-- Thay đổi thông báo -->
+        <div class="returne-continue-shop">
+            <a href="@Url.Action("Index", "Home")" class="continueshoping"><i class="fa fa-chevron-left"></i>Quay lại mua sắm</a>
+        </div>
+    </div>
+</body>
+</html>

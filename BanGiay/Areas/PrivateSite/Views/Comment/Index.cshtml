@@ -1,0 +1,129 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12 d-flex align-items-stretch">
+            <div class="card w-100">
+                <div class="card-body p-4">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6">
+                            <h5 class="card-title fw-600 mb-4">Danh sách bình luận</h5>
+                        </div>
+                        <div class="col-lg-6 col-md-6">
+                        </div>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-post text-nowrap mb-0 align-middle">
+                            <thead class="text-dark fs-4">
+                                <tr>
+                                    <th class="">
+                                        <h6 class="fw-600 mb-0">Thơì gian</h6>
+                                    </th>
+                                    <th class="">
+                                        <h6 class="fw-600 mb-0">ID tài khoản</h6>
+                                    </th>
+                                    <th class="">
+                                        <h6 class="fw-600 mb-0">Tên sản phẩm</h6>
+                                    </th>   
+                                    <th class="">
+                                        <h6 class="fw-600 mb-0">Lệnh</h6>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody id="tbody_Comment"></tbody>  
+                        </table>
+                    </div>
+                    <div id="loading" class=" m-auto  mt-4"></div>
+                </div>
+                <div class="card-tools p-5 pt-0 pb-0 m-auto" id="pagination"></div>
+            </div>
+        </div>
+    </div>
+</div>
+@section scriptComment{
+    <script>
+        var elementTable = $("#tbody_Comment");
+        $(document).ready(function () {
+            loadData("", null, 10);
+            $("#searchTicketID").on("keyup", function (event) {
+                var keyword = $('#searchTicketID').val();
+                loadData(keyword, null, 10);
+            });
+        });
+         function loadData(keyword, page, pageSize) {
+           ShowLoading(true);
+            $.ajax({
+                url: '@Url.Action("LoadData","Comment")',
+                type: 'GET',
+                dataType: 'json',
+                data: { keyword: keyword, page: page, pageSize: pageSize },
+                success: function (response) {
+                    if (response.status) {
+                        ShowLoading(false);
+                        elementTable.empty();
+                        $.each(response.Data, function (index, comment) {
+                            elementTable.append(`<tr>
+                                                <td><h6 class="fw-600 mb-0">${formatJsonDate1(comment.ngayDang)} </h6></td>
+                                                <td><h6 class="fw-600 mb-0">${comment.emailCM}</h6></td>
+                                                <td><h6 class="fw-600 mb-0">${comment.idSanPham}</h6></td>
+                                                <td><a class="btn btn-primary" href="/PrivateSite/Comment/Detail?id=${comment.sttBinhLuan}">Chi tiết</a>
+                                                <button type="button" class="btn btn-warning" onclick=Delete("${comment.sttBinhLuan}")>Xóa</button>
+                                            </tr>`);
+                        });
+                        Pagination(keyword, response.CurrentPage, response.NumberPage, response.PageSize);
+                    } else {
+                        alert(response.message)
+                    }
+                },
+                error: function () {
+                     alert("Đã xảy ra lỗi");
+                }
+            });
+        }
+         function Delete(id) {
+             Swal.fire({
+                title: "Bạn chắc chắn?",
+                text: "Bạn sẽ không thể khôi phục khi đã xóa",
+                icon: "warning",
+                showCancelButton: true,
+                cancelButtonColor: "#d33",
+                cancelButtonText: "Đóng",
+                confirmButtonColor: "#3085d6",
+                confirmButtonText: "Xác nhận xóa"
+             }).then((result) => {
+                 if (result.isConfirmed) {
+                    $.ajax({
+                        url: '@Url.Action("Delete", "Comment")',
+                        type: 'POST',
+                        data: { id: id },
+                        success: function (response) {
+                            if (response.status) {
+                                Swal.fire({
+                                    position: "center-center",
+                                    icon: "success",
+                                    title: response.message,
+                                    showConfirmButton: true,
+                                    timer: 1500
+                                }).then((result) => {
+                                    if (result.dismiss === Swal.DismissReason.timer || result.isConfirmed) {
+                                        location.reload(true);
+                                    }
+                                });
+
+                            } else {
+                                console.log("Xóa không thành công.");
+                            }
+                        },
+                        error: function (error) {
+                            console.error(error);
+                        }
+                    });
+                }
+        });
+        }
+    </script>
+}
+

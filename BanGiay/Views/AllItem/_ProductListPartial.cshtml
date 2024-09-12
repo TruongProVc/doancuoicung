@@ -1,0 +1,36 @@
+﻿@using PagedList.Mvc;
+@using PagedList;
+@model IPagedList<BanGiay.Models.SanPham>
+<div class="row">
+    @foreach (var sanPham in Model)
+    {
+        <div class="col-xl-4 col-sm-6 col-12">
+            <div class="product-default-single-item product-color--aqua" data-aos="fade-up" data-aos-delay="0">
+                <div class="image-box">
+                    <a href="@Url.Action("Index", "ProductDetails", new { idSanPham = sanPham.maSanPham })" class="image-link">
+                        <img src="@sanPham.hinhSanPham" alt="@sanPham.tenSanPham">
+                    </a>
+                </div>
+                <div class="content">
+                    <div class="content-left">
+                        <h6 class="title">
+                            <a href="@Url.Action("Index", "ProductDetails", new { idSanPham = sanPham.maSanPham })">
+                                @sanPham.tenSanPham
+                            </a>
+                        </h6>
+                    </div>
+                    <div class="content-right">
+
+                    </div>
+                </div>
+            </div>
+            <span class="price" style="color:red;">@String.Format("{0:N0} ₫", sanPham.giaTien)</span>
+
+        </div>  
+    }
+</div>
+
+<div class="page-pagination text-center">
+    @Html.PagedListPager(Model, page => Url.Action("LoadProducts", new { page, maThuongHieu = ViewBag.maThuongHieu }))
+</div>
+

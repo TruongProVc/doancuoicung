@@ -1,0 +1,54 @@
+﻿@using BanGiay.Models;
+@{
+    Layout = null;
+    string status = (ViewBag.displayError as string) ?? "";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link rel="shortcut icon" type="image/png" href="~/Asset/image/logos/favicon.png" />
+    <link href="~/Asset/Lib/Bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Asset/Css/styleLogin.css" rel="stylesheet" />
+    <style>
+        .nav_link {
+            text-decoration: none;
+            color: rgb(33, 37, 41);
+            font-size: 13px;
+            opacity: 0.7;
+        }
+
+            .nav_link:hover {
+                color: red;
+            }
+    </style>
+</head>
+<body>
+    <div class="main">
+        @using (Html.BeginForm("Login", "Account", FormMethod.Post, new { @class = "form", id = "form_b1" }))
+        {
+            @Html.AntiForgeryToken()
+            <h3 class="heading">Đăng nhập</h3>
+            <p class="desc">H&C Shoes</p>
+            <div class="spacer"></div>
+            <div class="form-group">
+                <label for="email" class="form-label">Email</label>
+                <input type="text" class="form-control" id="email" name="email" placeholder="Nhập email..." />
+            </div>
+            <div class="form-group">
+                <label for="password" class="form-label">Mật khẩu</label>
+                <input id="password" name="password" type="password" placeholder="Nhập mật khẩu" class="form-control">
+            </div>
+            <a href="@Url.Action("ForgotPassword", "Account")" class="nav_link" style="float:left; padding-left:5px;">Quên mật khẩu ?</a>
+            <a href="@Url.Action("Register","Account")" class="nav_link" style="float:right;padding-right:5px;">Đăng ký</a>
+            <div class="spacer"></div>
+            <p style="color:red;font-size:13px;">@ViewBag.displayError</p>
+            <button class="form-submit" type="submit" style="margin-top:15px;">Đăng nhập</button>
+        }
+    </div>
+
+</body>
+</html>

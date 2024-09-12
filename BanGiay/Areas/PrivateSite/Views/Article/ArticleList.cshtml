@@ -1,0 +1,331 @@
+﻿@using BanGiay.Models;
+@{
+    //TaiKhoan account = Session["InformationAccount"] as TaiKhoan;
+    ViewBag.Title = "Thêm bài viết";
+}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="container-fluid">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title fw-semibold mb-4">Thêm bài viết <a href="@Url.Action("ArticleList","Article")">Reset Form</a></h5>
+                        <div class="card">
+                            <div class="card-body">
+                                <form id="insertArticle" enctype="multipart/form-data">
+                                    @Html.AntiForgeryToken()
+                                    <div class="mb-3">
+                                        <input type="hidden" name="id" id="id" />
+                                        <p class="c-green" id="alert_Edit" style="font-weight:bold;"></p>
+                                        <label class="form-label">Tên bài viết</label>
+                                        <input type="text" class="form-control" name="articleName" id="name" />
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Nội dung tóm tắt</label>
+                                        <textarea class="form-control" name="summaryContent" id="sContent"></textarea>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Nội dung Chính</label>
+                                        <textarea class="form-control" name="content" id="content1"></textarea>
+                                    </div>
+                                    <div class="mb-3 ">
+                                        <label class="form-label">Hình bài viết</label>
+                                        <div class="custom-file">
+                                            <input type="file" class="custom-file-input" id="imgArticle" name="avatarArticle">
+                                        </div>
+                                        <div id="imagePreviewSingle" min-height="120px" min-width="120px" class="m-auto"></div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <div class="col-6">
+                                            <label class="form-label">Tài khoản đăng</label>
+                                            @*<input class="form-control" type="text" value="@account.email" disabled />*@
+                                        </div>
+                                        <div class="col-6">
+                                            <label class="form-label">Thời gian đăng</label>
+                                            <input type="text" class="form-control" value="@DateTime.Now" disabled>
+                                        </div>
+                                    </div>
+                                    <button type="submit" id="btnSubmit" class="btn btn-primary mt-2">Lưu bài viết</button>
+                                </form>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-12 d-flex align-items-stretch">
+            <div class="card w-100">
+                <div class="card-body p-4">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6">
+                            <h5 class="card-title fw-600 mb-4">Danh sách bài viết</h5>
+                        </div>
+                        <div class="col-lg-6 col-md-6">
+                            <input class="form-control" placeholder="Tìm kiếm ..." id="searchArticle" />
+                        </div>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-post text-nowrap mb-0 align-middle">
+                            <thead class="text-dark fs-4">
+                                <tr>
+                                    <th class="">
+                                        <h6 class="fw-600 mb-0">Id</h6>
+                                    </th>
+                                    <th class="">
+                                        <h6 class="fw-600 mb-0">Tên bài viết</h6>
+                                    </th>
+                                    <th class="">
+                                        <h6 class="fw-600 mb-0">Người đăng</h6>
+                                    </th>
+                                    <th class="">
+                                        <h6 class="fw-600 mb-0">Lượt xem</h6>
+                                    </th>
+                                    <th class="">
+                                        <h6 class="fw-600 mb-0">Lệnh</h6>
+                                    </th>
+                                    <th class="">
+                                        <h6 class="fw-600 mb-0">Trạng thái</h6>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody id="table_Article"></tbody>
+                        </table>
+                        <div id="messageNotFind" style="margin:auto;display:none; text-align:center;">Không tìm thấy</div>
+                    </div>
+                    <div id="loading" class=" m-auto  mt-4"></div>
+                </div>
+                <div class="card-tools p-5 pt-0 pb-0 m-auto" id="pagination"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://cdn.tiny.cloud/1/s41gi5sbzh6py5mxh7lfqah6eujl6z62rk3tyco0xyklvsd0/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
+
+@section scriptArticleList{
+    <script>
+        var ms = document.getElementById('messageNotFind');
+        var elementTable = $("#table_Article");
+
+        tinymce.init({
+            selector: '#content1',
+            toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
+            tinycomments_mode: 'embedded',
+            tinycomments_author: 'Author name',
+            ai_request: (request, respondWith) => respondWith.string(() => Promise.reject("See docs to implement AI Assistant")),
+        });
+
+        $(document).ready(function () {
+            InsertArticle();
+            LoadImage();
+            loadData("", null, 6);
+            $("#searchArticle").on("keyup", function (event) {
+                var keyword = $('#searchArticle').val();
+                loadData(keyword,  null, 6);
+            });
+        });
+        function EditArticle(id) {
+             $.ajax({
+                url: '@Url.Action("Edit", "Article")',
+                type: 'GET',
+                dataType: 'json',
+                data: { id: id },
+                 success: function (response) {
+                    var alertText = document.getElementById('alert_Edit')
+                     alertText.innerText = `Đang sửa mã: ${response.data.idBaiViet}`;
+                    $('#id').val(response.data.idBaiViet);
+                    $('#name').val(response.data.tenBaiViet);
+
+                    var imagePreview = document.getElementById('imagePreviewSingle');
+                    var img = document.createElement('img');
+                    img.src = response.data.hinhDaiDien;
+                    img.style.maxWidth = '25%';
+                    imagePreview.innerHTML = '';
+                    imagePreview.appendChild(img);
+                     $('#sContent').val(response.data.noiDungTomTat)
+
+                     tinymce.get('content1').setContent(response.data.noiDung);
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+        }
+         function InsertArticle() {
+            $('#insertArticle').submit(function (e) {
+                e.preventDefault();
+                var form = $(this)[0];
+                var data = new FormData(form);
+                $.ajax({
+                    url: '@Url.Action("Insert", "Article")',
+                    type: 'POST',
+                    processData: false,
+                    contentType: false,
+                    data: data,
+                    success: function (response) {
+                        if (response.status) {
+                            Swal.fire({
+                                position: "center-center",
+                                icon: "success",
+                                title: response.message,
+                                showConfirmButton: true,
+                                timer: 1500
+                                }).then((result) => {
+                                if (result.dismiss === Swal.DismissReason.timer || result.isConfirmed) {
+                                    location.reload(true);
+                                }
+                            });
+                        } else {
+                            Swal.fire({
+                                position: "center-center",
+                                icon: "error",
+                                title: response.message,
+                                showConfirmButton: true,
+                                timer: 1500
+                                }).then((result) => {
+                                if (result.dismiss === Swal.DismissReason.timer || result.isConfirmed) {
+                                    location.reload(true);
+                                }
+                            });
+                        }
+                    },
+                    error: function (err) {
+                        console.log(err)
+                        alert('Đã xảy ra lỗi khi thêm bài viết');
+                    }
+                });
+            });
+        }
+        function LoadImage() {
+            document.getElementById('imgArticle').addEventListener('change', function () {
+                var file = this.files[0];
+                if (file) {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        var imagePreview = document.getElementById('imagePreviewSingle');
+                        var img = document.createElement('img');
+                        img.src = e.target.result;
+                        img.style.maxWidth = '25%';
+                        imagePreview.innerHTML = '';
+                        imagePreview.appendChild(img);
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+        }
+        function loadData(keyword, page, pageSize) {
+            ShowLoading(true);
+            $.ajax({
+                url: '@Url.Action("LoadData","Article")',
+                type: 'GET',
+                dataType: 'json',
+                data: { keyword: keyword, page: page, pageSize: pageSize },
+                success: function (response) {
+                    ShowLoading(false)
+                    elementTable.empty();
+                    $.each(response.Data, function (index, article) {
+                        elementTable.append(`<tr>
+                                        <td><h6 class="fw-600 mb-0">${article.idBaiViet}</h6></td>
+                                        <td><h6 class="fw-600 mb-1">${article.tenBaiViet}</h6></td>
+                                        <td><h6 class="fw-600 mb-1">2375427638</h6></td>
+                                        <td><h6 class="fw-600 mb-1">${article.luotXem}</h6></td>
+                                        <td><button type="button" class="btn btn-primary" onclick="EditArticle(${article.idBaiViet})">Sửa</button>
+                                        <button type="button" class="btn ${article.trangThai == true ? "btn-secondary" : "btn-success"}" onclick="Active(${article.idBaiViet})">${article.trangThai == true ? "Ẩn" : "Hiện"}</button>
+                                        <button type="button" class="btn btn-danger m-1" onclick="Delete(${article.idBaiViet})">Xóa</button></td>
+                                        <td><div class="d-flex align-items-center gap-2"><span class="badge ${article.trangThai == true ? "bg-success" : "bg-secondary"} rounded-3 fw-600">${article.trangThai == true ? "hiển thị" : "ẩn"}</span></div></td>
+                                    </tr>`);
+                    });
+                    ms.style.display = "none"
+                    if ((keyword.lenght > 0) && (response.NumberPage == 0 && response.TotalItem == 0)) ms.style.display = "block"
+                    Pagination(keyword, response.CurrentPage, response.NumberPage, response.PageSize);
+                },
+                error: function (error) {
+                    console.error(error);
+                }
+            });
+        }
+        function Delete(id) {
+            Swal.fire({
+                title: "Bạn chắc chắn?",
+                text: "Bạn sẽ không thể khôi phục khi đã xóa",
+                icon: "warning",
+                showCancelButton: true,
+                cancelButtonColor: "#d33",
+                cancelButtonText: "Đóng",
+                confirmButtonColor: "#3085d6",
+                confirmButtonText: "Xóa bài viết"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: '@Url.Action("Delete","Article")',
+                        type: 'POST',
+                        data: { id: id },
+                        success: function (response) {
+                            if (response.status) {
+                                Swal.fire({
+                                    position: "center-center",
+                                    icon: "success",
+                                    title: response.message,
+                                    showConfirmButton: true,
+                                    timer: 1500
+                                }).then((result) => {
+                                    if (result.dismiss === Swal.DismissReason.timer || result.isConfirmed) {
+                                        location.reload(true);
+                                    }
+                                });
+                            } else {
+                                console.log("Xóa không thành công.");
+                            }
+                        },
+                        error: function (error) {
+                            console.error(error);
+                        }
+                    });
+                }
+            });
+        }
+        function Active(id) {
+            console.log(id);
+            $.ajax({
+                url: '@Url.Action("ActiveArticle", "Article")',
+                type: 'POST',
+                data: { id: id },
+                success: function (response) {
+                    if (response.status) {
+                        Swal.fire({
+                            position: "center-center",
+                            icon: "success",
+                            title: response.message,
+                            showConfirmButton: true,
+                            timer: 1500
+                        }).then((result) => {
+                            if (result.dismiss === Swal.DismissReason.timer || result.isConfirmed) {
+                                location.reload(true);
+                            }
+                        });
+                    } else {
+                        Swal.fire({
+                            position: "center-center",
+                            icon: "error",
+                            title: response.message,
+                            showConfirmButton: true,
+                            timer: 1500
+                        }).then((result) => {
+                            if (result.dismiss === Swal.DismissReason.timer || result.isConfirmed) {
+                                location.reload(true);
+                            }
+                        });
+                    }
+                },
+                error: function (error) {
+                    console.error(error);
+                }
+            });
+        }
+    </script>
+}
+
+
+
+
+

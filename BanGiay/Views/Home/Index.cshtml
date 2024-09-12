@@ -1,0 +1,494 @@
+﻿@using BanGiay.Models
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    List<SanPham> sp = ViewData["dssp"] as List<SanPham>;
+
+}
+
+<!-- Start Offcanvas Addcart Section -->
+<!-- End Offcanvas Search Bar Section -->
+<!-- Offcanvas Overlay -->
+<!-- Start Hero Slider Section-->
+<div class="hero-slider-section">
+    <!-- Slider main container -->
+    <div class="hero-slider-active swiper-container">
+        <!-- Additional required wrapper -->
+        <div class="swiper-wrapper">
+            <!-- Start Hero Single Slider Item -->
+            <div class="hero-single-slider-item swiper-slide">
+                <!-- Hero Slider Image -->
+                <div class="hero-slider-bg">
+                    <img src="~/Asset/assets/images/hero-slider/home-3/pexels-cottonbro-6153367.jpg" alt="">
+                </div>
+                <!-- Hero Slider Content -->
+                <div class="hero-slider-wrapper">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-auto">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- End Hero Single Slider Item -->
+            <!-- Start Hero Single Slider Item -->
+            <div class="hero-single-slider-item swiper-slide">
+                <!-- Hero Slider Image -->
+                <div class="hero-slider-bg">
+                    <img src="~/Asset/assets/images/hero-slider/home-3/pexels-craytive-1478442.jpg" alt="">
+                </div>
+                <!-- Hero Slider Content -->
+                <div class="hero-slider-wrapper">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-auto">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- End Hero Single Slider Item -->
+            <div class="hero-single-slider-item swiper-slide">
+                <!-- Hero Slider Image -->
+                <div class="hero-slider-bg">
+                    <img src="~/Asset/assets/images/hero-slider/home-3/pexels-mnzoutfits-1598505.jpg" alt="">
+                </div>
+                <!-- Hero Slider Content -->
+                <div class="hero-slider-wrapper">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-auto">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- End Hero Single Slider Item -->
+        </div>
+
+        <!-- If we need pagination -->
+        <!-- If we need navigation buttons -->
+        <div class="swiper-button-prev d-none d-lg-block"></div>
+        <div class="swiper-button-next d-none d-lg-block"></div>
+    </div>
+</div>
+<!-- End Hero Slider Section-->
+<!-- Start Service Section -->
+<div class="service-promo-section section-top-gap-100">
+    <div class="service-wrapper">
+        <div class="container">
+            <div class="row">
+                <!-- Start Service Promo Single Item -->
+                <div class="col-lg-3 col-sm-6 col-12">
+                    <div class="service-promo-single-item" data-aos="fade-up" data-aos-delay="0">
+                        <div class="image">
+                            <img src="~/Asset/assets/images/icons/service-promo-5.png" alt="">
+                        </div>
+                        <div class="content">
+                            <h6 class="title">Miễn phí giao hàng</h6>
+                        </div>
+                    </div>
+                </div>
+                <!-- End Service Promo Single Item -->
+                <!-- Start Service Promo Single Item -->
+                <div class="col-lg-3 col-sm-6 col-12">
+                    <div class="service-promo-single-item" data-aos="fade-up" data-aos-delay="200">
+                        <div class="image">
+                            <img src="~/Asset/assets/images/icons/service-promo-6.png" alt="">
+                        </div>
+                        <div class="content">
+                            <h6 class="title">30 Đổi trả sản phẩm</h6>
+                        </div>
+                    </div>
+                </div>
+                <!-- End Service Promo Single Item -->
+                <!-- Start Service Promo Single Item -->
+                <div class="col-lg-3 col-sm-6 col-12">
+                    <div class="service-promo-single-item" data-aos="fade-up" data-aos-delay="400">
+                        <div class="image">
+                            <img src="~/Asset/assets/images/icons/service-promo-7.png" alt="">
+                        </div>
+                        <div class="content">
+                            <h6 class="title">Thanh toán an toàn</h6>
+                        </div>
+                    </div>
+                </div>
+                <!-- End Service Promo Single Item -->
+                <!-- Start Service Promo Single Item -->
+                <div class="col-lg-3 col-sm-6 col-12">
+                    <div class="service-promo-single-item" data-aos="fade-up" data-aos-delay="600">
+                        <div class="image">
+                            <img src="~/Asset/assets/images/icons/service-promo-8.png" alt="">
+                        </div>
+                        <div class="content">
+                            <h6 class="title">Trung thành với khách hàng</h6>
+                        </div>
+                    </div>
+                </div>
+                <!-- End Service Promo Single Item -->
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Service Section -->
+<!-- Start Banner Section -->
+<!-- End Banner Section -->
+<!-- Start Product Default Slider Section -->
+<div class="product-default-slider-section section-top-gap-100 section-fluid">
+    <!-- Start Section Content Text Area -->
+    <div class="section-title-wrapper" data-aos="fade-up" data-aos-delay="0">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="section-content-gap">
+                        <div class="secton-content" style="display: flex; justify-content: center; align-items: center;">
+                            <h3 class="section-title">Sản phẩm mới</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Start Section Content Text Area -->
+    <!-- Start Section Content Text Area -->
+    <div class="product-wrapper" data-aos="fade-up" data-aos-delay="200">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <a href="@Url.Action("Index","AllItem")"> Tất cả sản phẩm</a>
+                    <div class="product-slider-default-2rows default-slider-nav-arrow">
+                        <!-- Slider main container -->
+                        <div class="swiper-container product-default-slider-4grid-2row">
+                            <!-- Additional required wrapper -->
+                            <div class="swiper-wrapper">
+                                <!-- Start Product Default Single Item -->
+                                @foreach (var item in sp)
+                                {
+                                    <div class="product-default-single-item product-color--pink swiper-slide">
+                                        <div class="image-box">
+                                            <a href="@Url.Action("Index", "ProductDetails", new { idSanPham = item.maSanPham })" class="image-link">
+                                                <img src="@item.hinhSanPham" alt="@item.tenSanPham">
+                                            </a>
+
+                                            <div class="tag">
+                                                <span>sale</span>
+                                            </div>
+
+                                        </div>
+                                        <div class="content">
+                                            <div class="content-left">
+                                                <h6 class="title">
+                                                    <a href="@Url.Action("Index", "ProductDetails", new { idSanPham = item.maSanPham })">
+                                                        @item.tenSanPham
+                                                    </a>
+                                                </h6>
+                                                <span class="price" style="color:red;">@String.Format("{0:0,0} ₫", item.giaTien)</span>
+                                            </div>
+                                            @*<ul class="review-star">
+                                                    <li class="fill"><i class="ion-android-star"></i></li>
+                                                    <li class="fill"><i class="ion-android-star"></i></li>
+                                                    <li class="fill"><i class="ion-android-star"></i></li>
+                                                    <li class="fill"><i class="ion-android-star"></i></li>
+                                                    <li class="empty"><i class="ion-android-star"></i></li>
+                                                </ul>*@
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- End Product Default Slider Section -->
+<!-- Start Product Default Slider Section -->
+<div class="product-default-slider-section section-top-gap-100 section-fluid">
+    <!-- Start Section Content Text Area -->
+    <div class="section-title-wrapper" data-aos="fade-up" data-aos-delay="0">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="section-content-gap">
+                        <div class="secton-content" style="display: flex; justify-content: center; align-items: center;">
+                            <h3 class="section-title">Sản phẩm bán chạy</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Start Section Content Text Area -->
+    <div class="product-wrapper" data-aos="fade-up" data-aos-delay="200">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="product-slider-default-2rows default-slider-nav-arrow">
+                        <!-- Slider main container -->
+                        <div class="swiper-container product-default-slider-4grid-2row">
+                            <!-- Additional required wrapper -->
+                            <div class="swiper-wrapper">
+                                <!-- Start Product Default Single Item -->
+                                @foreach (var item in sp)
+                                {
+                                    <div class="product-default-single-item product-color--pink swiper-slide">
+                                        <div class="image-box">
+                                            <a href="@Url.Action("Index", "ProductDetail", new { idSanPham = item.maSanPham })" class="image-link">
+                                                <img src="@item.hinhSanPham" alt="@item.tenSanPham">
+                                            </a>
+                                            <div class="tag">
+                                                <span>sale</span>
+                                            </div>
+
+                                        </div>
+                                        <div class="content">
+                                            <div class="content-left">
+                                                <h6 class="title">
+                                                    <a href="product-details-default.html">
+                                                        @item.tenSanPham
+                                                    </a>
+                                                </h6>
+                                                <span class="price" style="color:red;">@String.Format("{0:0,0} ₫", item.giaTien)</span>
+                                            </div>
+                                            @*<ul class="review-star">
+                                                    <li class="fill"><i class="ion-android-star"></i></li>
+                                                    <li class="fill"><i class="ion-android-star"></i></li>
+                                                    <li class="fill"><i class="ion-android-star"></i></li>
+                                                    <li class="fill"><i class="ion-android-star"></i></li>
+                                                    <li class="empty"><i class="ion-android-star"></i></li>
+                                                </ul>*@
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div><!-- End Product Default Slider Section -->
+<!-- Start Blog Slider Section -->
+<div class="blog-default-slider-section section-top-gap-100 section-fluid">
+    <!-- Start Section Content Text Area -->
+    <div class="section-title-wrapper" data-aos="fade-up" data-aos-delay="0">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="section-content-gap">
+                        <div class="secton-content" style="display: flex; justify-content: center; align-items: center;">
+                            <h3 class="section-title">Tin tức</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Start Section Content Text Area -->
+    <div class="blog-wrapper" data-aos="fade-up" data-aos-delay="200">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="blog-default-slider default-slider-nav-arrow">
+                        <!-- Slider main container -->
+                        <div class="swiper-container blog-slider">
+                            <!-- Additional required wrapper -->
+                            <div class="swiper-wrapper">
+                                <!-- Start Product Default Single Item -->
+                                <div class="blog-default-single-item blog-color--pink swiper-slide">
+                                    <div class="image-box">
+                                        <a href="blog-single-sidebar-left.html" class="image-link">
+                                            <img class="img-fluid"
+                                                 src="~/Asset/assets/images/blog/blog-grid-home-1-img-1.jpg" alt="">
+                                        </a>
+                                    </div>
+                                    <div class="content">
+                                        <h6 class="title">
+                                            <a href="blog-single-sidebar-left.html">Blog Post One</a>
+                                        </h6>
+                                        <p>
+                                            Donec vitae hendrerit arcu, sit amet faucibus nisl. Cras pretium arcu ex.
+                                            Aenean posuere libero eu augue condimentum rhoncus. Praesent
+                                        </p>
+                                        <div class="inner">
+                                            <a href="blog-single-sidebar-left.html"
+                                               class="read-more-btn icon-space-left">
+                                                Read More <span>
+                                                    <i class="ion-ios-arrow-thin-right"></i>
+                                                </span>
+                                            </a>
+                                            <div class="post-meta">
+                                                <a href="#" class="date">24 Apr</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- End Product Default Single Item -->
+                                <!-- Start Product Default Single Item -->
+                                <div class="blog-default-single-item blog-color--pink swiper-slide">
+                                    <div class="image-box">
+                                        <a href="blog-single-sidebar-left.html" class="image-link">
+                                            <img class="img-fluid"
+                                                 src="~/Asset/assets/images/blog/blog-grid-home-1-img-2.jpg" alt="">
+                                        </a>
+                                    </div>
+                                    <div class="content">
+                                        <h6 class="title">
+                                            <a href="blog-single-sidebar-left.html">Blog Post Two</a>
+                                        </h6>
+                                        <p>
+                                            Donec vitae hendrerit arcu, sit amet faucibus nisl. Cras pretium arcu ex.
+                                            Aenean posuere libero eu augue condimentum rhoncus. Praesent
+                                        </p>
+                                        <div class="inner">
+                                            <a href="#" class="read-more-btn icon-space-left">
+                                                Read More <span>
+                                                    <i class="ion-ios-arrow-thin-right"></i>
+                                                </span>
+                                            </a>
+                                            <div class="post-meta">
+                                                <a href="blog-single-sidebar-left.html" class="date">24 Apr</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- End Product Default Single Item -->
+                                <!-- Start Product Default Single Item -->
+                                <div class="blog-default-single-item blog-color--pink swiper-slide">
+                                    <div class="image-box">
+                                        <a href="blog-single-sidebar-left.html" class="image-link">
+                                            <img class="img-fluid"
+                                                 src="~/Asset/assets/images/blog/blog-grid-home-1-img-3.jpg" alt="">
+                                        </a>
+                                    </div>
+                                    <div class="content">
+                                        <h6 class="title">
+                                            <a href="blog-single-sidebar-left.html">
+                                                Blog Post
+                                                Three
+                                            </a>
+                                        </h6>
+                                        <p>
+                                            Donec vitae hendrerit arcu, sit amet faucibus nisl. Cras pretium arcu ex.
+                                            Aenean posuere libero eu augue condimentum rhoncus. Praesent
+                                        </p>
+                                        <div class="inner">
+                                            <a href="blog-single-sidebar-left.html"
+                                               class="read-more-btn icon-space-left">
+                                                Read More <span>
+                                                    <i class="ion-ios-arrow-thin-right"></i>
+                                                </span>
+                                            </a>
+                                            <div class="post-meta">
+                                                <a href="#" class="date">24 Apr</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- End Product Default Single Item -->
+                                <!-- Start Product Default Single Item -->
+                                <div class="blog-default-single-item blog-color--pink swiper-slide">
+                                    <div class="image-box">
+                                        <a href="blog-single-sidebar-left.html" class="image-link">
+                                            <img class="img-fluid"
+                                                 src="~/Asset/assets/images/blog/blog-grid-home-1-img-4.jpg" alt="">
+                                        </a>
+                                    </div>
+                                    <div class="content">
+                                        <h6 class="title">
+                                            <a href="blog-single-sidebar-left.html">Blog Post Four</a>
+                                        </h6>
+                                        <p>
+                                            Donec vitae hendrerit arcu, sit amet faucibus nisl. Cras pretium arcu ex.
+                                            Aenean posuere libero eu augue condimentum rhoncus. Praesent
+                                        </p>
+                                        <div class="inner">
+                                            <a href="blog-single-sidebar-left.html"
+                                               class="read-more-btn icon-space-left">
+                                                Read More <span>
+                                                    <i class="ion-ios-arrow-thin-right"></i>
+                                                </span>
+                                            </a>
+                                            <div class="post-meta">
+                                                <a href="#" class="date">24 Apr</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- End Product Default Single Item -->
+                                <!-- Start Product Default Single Item -->
+                                <div class="blog-default-single-item blog-color--pink swiper-slide">
+                                    <div class="image-box">
+                                        <a href="blog-single-sidebar-left.html" class="image-link">
+                                            <img class="img-fluid"
+                                                 src="~/Asset/assets/images/blog/blog-grid-home-1-img-5.jpg" alt="">
+                                        </a>
+                                    </div>
+                                    <div class="content">
+                                        <h6 class="title">
+                                            <a href="blog-single-sidebar-left.html">Blog Post Five</a>
+                                        </h6>
+                                        <p>
+                                            Donec vitae hendrerit arcu, sit amet faucibus nisl. Cras pretium arcu ex.
+                                            Aenean posuere libero eu augue condimentum rhoncus. Praesent
+                                        </p>
+                                        <div class="inner">
+                                            <a href="blog-single-sidebar-left.html"
+                                               class="read-more-btn icon-space-left">
+                                                Read More <span>
+                                                    <i class="ion-ios-arrow-thin-right"></i>
+                                                </span>
+                                            </a>
+                                            <div class="post-meta">
+                                                <a href="#" class="date">24 Apr</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- End Product Default Single Item -->
+                                <!-- Start Product Default Single Item -->
+                                <div class="blog-default-single-item blog-color--pink swiper-slide">
+                                    <div class="image-box">
+                                        <a href="blog-single-sidebar-left.html" class="image-link">
+                                            <img class="img-fluid"
+                                                 src="~/Asset/assets/images/blog/blog-grid-home-1-img-6.jpg" alt="">
+                                        </a>
+                                    </div>
+                                    <div class="content">
+                                        <h6 class="title">
+                                            <a href="blog-single-sidebar-left.html">Blog Post Six</a>
+                                        </h6>
+                                        <p>
+                                            Donec vitae hendrerit arcu, sit amet faucibus nisl. Cras pretium arcu ex.
+                                            Aenean posuere libero eu augue condimentum rhoncus. Praesent
+                                        </p>
+                                        <div class="inner">
+                                            <a href="blog-single-sidebar-left.html"
+                                               class="read-more-btn icon-space-left">
+                                                Read More <span>
+                                                    <i class="ion-ios-arrow-thin-right"></i>
+                                                </span>
+                                            </a>
+                                            <div class="post-meta">
+                                                <a href="#" class="date">24 Apr</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- End Product Default Single Item -->
+                            </div>
+                        </div>
+                        <!-- If we need navigation buttons -->
+                        <div class="swiper-button-prev"></div>
+                        <div class="swiper-button-next"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Blog Slider Section -->

@@ -1,0 +1,334 @@
+﻿@using BanGiay.Models;
+@{
+    var brandList = ViewData["BrandList"] as List<ThHieu>;
+    var catelist = ViewData["CateList"] as List<DMuc>;
+    ViewBag.Title = "Index";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12 ">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title fw-semibold mb-4">Thêm phim <a href="/PrivateSite/Movie/Index">Reset form</a></h5>
+                    <div class="card">
+                        <div class="card-body">
+                            <form id="formProduct" enctype="multipart/form-data">
+                                @Html.AntiForgeryToken()
+                                <div class="mb-3">
+                                    <p class="c-green" id="alert_Edit" style="font-weight:bold;"></p>
+                                    <label class="form-label">Tên sản phẩm</label>
+                                    <input type="text" class="form-control" name="name" id="name" placeholder="Tên sản phẩm">
+                                </div>
+                                <div class="mb-3 ">
+                                    <label class="form-label">Hình đại diện</label>
+                                    <div><input type="file" id="imageMovie" name="hinh" /></div>
+                                    <div id="imagePreviewSingle" min-height="120px" min-width="120px" class="m-auto"></div>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Mô tả</label>
+                                    <textarea class="form-control" placeholder="" name="description" id="description"></textarea>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Số Lương</label>
+                                    <textarea class="form-control" placeholder="" name="quality" id="number"></textarea>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Giá tiền</label>
+                                    <textarea class="form-control" placeholder="" name="Price" id="Price"></textarea>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-6">
+                                        <label class="form-label">Thương hiệu</label>
+                                        <select class="form-control" id="selectCountry" name="brand">
+                                            @foreach (var item in brandList)
+                                            {
+                                                <option value="@item.maTH">@item.tenTH</option>
+                                            }
+                                        </select>
+                                    </div>
+                                    <div class="col-6">
+                                        <label class="form-label">Danh mục</label>
+                                        <select class="form-control" id="selectCountry" name="category">
+                                            @foreach (var item in catelist)
+                                            {
+                                                <option value="@item.maDM">@item.maDM</option>
+                                            }
+                                        </select>
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-primary mt-2">Lưu</button>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-12 d-flex align-items-stretch">
+            <div class="card w-100">
+                <div class="card-body p-4">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6">
+                            <h5 class="card-title fw-600 mb-4">Danh sách phim</h5>
+                        </div>
+                        <div class="col-lg-6 col-md-6">
+                            <input class="form-control" placeholder="Tìm kiếm ..." id="searchMovie" />
+                        </div>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-post text-nowrap mb-0 align-middle">
+                            <thead class="text-dark fs-4">
+                                <tr>
+                                    <th class="">
+                                        <h6 class="fw-600 mb-0">Mã sản phẩm</h6>
+                                    </th>
+                                    <th class="">
+                                        <h6 class="fw-600 mb-0">Tên Sản phẩm</h6>
+                                    </th>
+                                    <th class="">
+                                        <h6 class="fw-600 mb-0">Giá tiền</h6>
+                                    </th>
+                                    <th class="">
+                                        <h6 class="fw-600 mb-0">mô tả</h6>
+                                    </th>
+                                    <th class="">
+                                        <h6 class="fw-600 mb-0">Danh mục</h6>
+                                    </th>
+                                    <th class="">
+                                        <h6 class="fw-600 mb-0">Thương hiệu</h6>
+                                    </th>
+                                    <th class="">
+                                        <h6 class="fw-600 mb-0">Lệnh</h6>
+                                    </th>
+                                    <th class="">
+                                        <h6 class="fw-600 mb-0">Trạng thái</h6>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody id="tbody_Movie"></tbody>
+                        </table>
+                        <div id="messageNotFind" style="margin:auto;display:none; text-align:center;">Không tìm thấy</div>
+                    </div>
+                    <div id="loading" class=" m-auto  mt-4"></div>
+                </div>
+                <div class="card-tools p-5 pt-0 pb-0 m-auto" id="pagination"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scriptProduct {
+    <script>
+        var elementTableBody = $("#tbody_Movie");
+        var ms = document.getElementById('messageNotFind');
+
+        $(document).ready(function () {
+            Insert();
+            LoadImage();
+            loadData("", null, 10);
+
+            $("#searchMovie").on("keyup", function () {
+                var keyword = $('#searchMovie').val();
+                loadData(keyword, null, 10);
+            });
+        });
+
+      function EditMovie(id) {
+    $.ajax({
+        url: '@Url.Action("Edit", "Product")',
+        type: 'GET',
+        dataType: 'json',
+        data: { id: id },
+        success: function (response) {
+            if (response.status) {
+                var data = response.data;
+                $('#alert_Edit').text(`Đang sửa mã: ${data.maSanPham}`);
+                $('#name').val(data.tenSanPham);
+
+                // Handle image preview
+                var imagePreview = $('#imagePreviewSingle');
+                imagePreview.empty(); // Clear existing image
+                if (data.hinhSanPham) {
+                    $('<img>')
+                        .attr('src', data.hinhSanPham)
+                        .css('max-width', '25%')
+                        .appendTo(imagePreview);
+                }
+
+                $('#description').val(data.moTa);
+                $('#number').val(data.soLuong);
+                $('#Price').val(data.giaTien);
+
+                // Set select options
+                $('#selectCountry').val(data.maThuongHieu); // Brand
+                $('#selectCate').val(data.maDanhMuc); // Category
+            } else {
+                alert('Không tìm thấy sản phẩm!');
+            }
+        },
+        error: function () {
+            alert("Đã xảy ra lỗi");
+        }
+    });
+}
+
+function Insert() {
+    $('#formProduct').submit(function (e) {
+        e.preventDefault();
+        var data = new FormData(this);
+        console.log(data);
+        $.ajax({
+            url: '@Url.Action("Insert", "Product")',
+            type: 'POST',
+            processData: false,
+            contentType: false,
+            data: data,
+            success: function (response) {
+                Swal.fire({
+                    position: "center-center",
+                    icon: response.status ? "success" : "error",
+                    title: response.message,
+                    showConfirmButton: true,
+                    timer: 1500
+                }).then((result) => {
+                    if (result.dismiss === Swal.DismissReason.timer || result.isConfirmed) {
+                        location.reload(true);
+                    }
+                });
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        });
+    });
+}
+
+
+        function LoadImage() {
+            document.getElementById('imageMovie').addEventListener('change', function () {
+                var file = this.files[0];
+                if (file) {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        var imagePreview = document.getElementById('imagePreviewSingle');
+                        var img = document.createElement('img');
+                        img.src = e.target.result;
+                        img.style.maxWidth = '25%';
+                        imagePreview.innerHTML = '';
+                        imagePreview.appendChild(img);
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+        }
+
+        function loadData(keyword, page, pageSize) {
+            ShowLoading(true);
+            $.ajax({
+                url: '@Url.Action("LoadData", "Product")',
+                type: 'GET',
+                dataType: 'json',
+                data: { keyword: keyword, page: page, pageSize: pageSize },
+                success: function (response) {
+                    ShowLoading(false);
+                    elementTableBody.empty();
+
+                    if (response.status) {
+                        $.each(response.Data, function (index, sp) {
+                            elementTableBody.append(`<tr>
+                <td><h6 class="fw-600 mb-0">${sp.maSanPham}</h6></td>
+                <td><h6 class="fw-600 mb-0">${sp.tenSanPham}</h6></td>
+                    <td><h6 class="fw-600 mb-0">${sp.giaTien}</h6></td>
+
+                <td><h6 class="fw-600 mb-1">${sp.moTa}</h6></td>
+                <td><h6 class="fw-600 mb-0">${sp.maDM}</h6></td>
+                <td><h6 class="fw-600 mb-1">${sp.maTH}</h6></td>
+                <td>
+                    <button type="button" class="btn btn-primary" onclick="EditMovie(${sp.maSanPham})">Sửa</button>
+                    <button type="button" class="btn ${sp.trangthai == false ? "btn-primary" : "btn-danger"}" onclick="Status(${sp.maSanPham})">${sp.trangthai == false ? "Ẩn" : "Hiện"}</button>
+                    <button type="button" class="btn btn-danger m-1" onclick="DeleteMovie(${sp.maSanPham})">Xóa</button>
+                </td>
+                <td><div class="d-flex align-items-center gap-2"><span class="badge ${(sp.trangthai == true ? " bg-success" : "bg-danger")} rounded-3 fw-600">${sp.trangthai == true ? "Đang bán" : "Ẩn"}</span></div></td>
+            </tr>`);
+                        });
+
+                        ms.style.display = (keyword.length > 0 && response.NumberPage === 0 && response.TotalItem === 0) ? "block" : "none";
+                        Pagination(keyword, response.CurrentPage, response.NumberPage, response.PageSize);
+                    } else {
+                        alert(response.message);
+                    }
+                },
+                error: function () {
+                    alert("Đã xảy ra lỗi");
+                }
+            });
+        }
+
+        function DeleteMovie(id) {
+            Swal.fire({
+                title: "Bạn chắc chắn?",
+                text: "Bạn sẽ không thể khôi phục khi đã xóa",
+                icon: "warning",
+                showCancelButton: true,
+                cancelButtonColor: "#d33",
+                cancelButtonText: "Đóng",
+                confirmButtonColor: "#3085d6",
+                confirmButtonText: "Xóa sản phẩm"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: '@Url.Action("Delete", "Product")',
+                        type: 'POST',
+                        data: { id: id },
+                        success: function (response) {
+                            if (response.status) {
+                                Swal.fire({
+                                    position: "center-center",
+                                    icon: "success",
+                                    title: response.message,
+                                    showConfirmButton: true,
+                                    timer: 1500
+                                }).then((result) => {
+                                    if (result.dismiss === Swal.DismissReason.timer || result.isConfirmed) {
+                                        location.reload(true);
+                                    }
+                                });
+                            } else {
+                                console.log("Xóa không thành công.");
+                            }
+                        },
+                        error: function () {
+                            alert("Đã xảy ra lỗi");
+                        }
+                    });
+                }
+            });
+        }
+
+       function Status(id) {
+    $.ajax({
+        url: '@Url.Action("ChangeStatus", "Product")', // Ensure this URL is correct
+        type: 'POST',
+        data: { id: id }, // Ensure id is an integer
+        success: function (response) {
+            Swal.fire({
+                position: "center",
+                icon: response.status ? "success" : "error",
+                title: response.message,
+                showConfirmButton: true,
+                timer: 1500
+            }).then((result) => {
+                if (result.dismiss === Swal.DismissReason.timer || result.isConfirmed) {
+                    location.reload(true); // Optionally, use location.reload() without parameters
+                }
+            });
+        },
+        error: function () {
+            alert("Đã xảy ra lỗi"); // Customize error message if needed
+        }
+    });
+}
+
+    </script>
+}

@@ -1,0 +1,214 @@
+﻿@using BanGiay.Models;
+@{
+    var account = (Session["InformationAccount"] as TaiKhoan) ?? null;
+
+
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link rel="shortcut icon" type="image/png" href="~/Asset/image/logos/favicon.png" />
+    <link href="~/Asset/Css/styles.css" rel="stylesheet" />
+    <link href="~/Asset/Lib/Bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Asset/Css/icons/tabler-icons/tabler-icons.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+         data-sidebar-position="fixed" data-header-position="fixed">
+        <aside class="left-sidebar">
+            <div>
+                <div class="brand-logo d-flex align-items-center justify-content-between">
+                    <a href="./index.html" class="text-nowrap logo-img" style="text-decoration:none; color:black;margin-top:5px;">
+                        <h2 style="color: black; margin-top: 5px; ">H&C Shoes</h2>
+                    </a>
+                    <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
+                        <i class="ti ti-x fs-8"></i>
+                    </div>
+                </div>
+                <nav class="sidebar-nav scroll-sidebar" data-simplebar="">
+                    <ul id="sidebarnav">
+                        <li class="nav-small-cap">
+                            <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+                            <span class="hide-menu">Trang chủ</span>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link" href="@Url.Action("Index","Dashboard")" aria-expanded="false">
+                                <span>
+                                    <i class="ti ti-layout-dashboard"></i>
+                                </span>
+                                <span class="hide-menu">Dashboard</span>
+                            </a>
+                        </li>
+                        <li class="nav-small-cap">
+                            <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+                            <span class="hide-menu">Soát vé</span>
+                        </li>
+
+                        <li class="nav-small-cap">
+                            <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+                            <span class="hide-menu">Bài viết</span>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link" href="@Url.Action("ArticleList","Article")" aria-expanded="false">
+                                <span>
+                                    <i class="ti ti-book-2"></i>
+                                </span>
+                                <span class="hide-menu">Bài viết</span>
+                            </a>
+                        </li>
+                        <li class="nav-small-cap">
+                            <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+                            <span class="hide-menu">Phim</span>
+                        </li>
+
+                        <li class="sidebar-item">
+                            <a class="sidebar-link" href="@Url.Action("Index","Brand")" aria-expanded="false">
+                                <span>
+                                    <i class="ti ti-world"></i>
+                                </span>
+                                <span class="hide-menu">Thương hiệu</span>
+                            </a>
+                        </li>
+
+                        <li class="nav-small-cap">
+                            <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+                            <span class="hide-menu">Bình luận</span>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link" href="@Url.Action("Index","Comment")" aria-expanded="false">
+                                <span>
+                                    <i class="ti ti-book-2"></i>
+                                </span>
+                                <span class="hide-menu">Danh sách bình luận</span>
+                            </a>
+                        </li>
+                        <li class="nav-small-cap">
+                            <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+                            <span class="hide-menu">Tài khoản</span>
+                        </li>
+
+                        <li class="sidebar-item">
+                            <a class="sidebar-link" href="@Url.Action("ListOfAccount","AccountManagement")" aria-expanded="false">
+                                <span>
+                                    <i class="ti ti-user"></i>
+                                </span>
+                                <span class="hide-menu">Quản lí tài khoản</span>
+                            </a>
+                        </li>
+                        <li class="nav-small-cap">
+                            <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+                            <span class="hide-menu">Sản phẩm</span>
+                        </li>
+
+                        <li class="sidebar-item">
+                            <a class="sidebar-link" href="@Url.Action("Index","Product")" aria-expanded="false">
+                                <span>
+                                    <i class="ti ti-user"></i>
+                                </span>
+                                <span class="hide-menu">Quản lí sản phẩm</span>
+                            </a>
+                        </li>
+
+
+                        <li class="nav-small-cap">
+                            <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+                            <span class="hide-menu">Đơn hàng</span>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link" href="@Url.Action("Index","Order")" aria-expanded="false">
+                                <span>
+                                    <i class="ti ti-garden-cart"></i>
+                                </span>
+                                <span class="hide-menu">Danh sách đơn hàng</span>
+                            </a>
+                        </li>
+                        <li class="nav-small-cap">
+                            <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+                            <span class="hide-menu">Doanh thu</span>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link" href="@Url.Action("Index","Revenue")" aria-expanded="false">
+                                <span>
+                                    <i class="ti ti-file-analytics"></i>
+                                </span>
+                                <span class="hide-menu">Doanh thu</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </aside>
+        <div class="body-wrapper">
+            <header class="app-header">
+                <nav class="navbar navbar-expand-lg navbar-light">
+                    <ul class="navbar-nav">
+                        <li class="nav-item d-block d-xl-none">
+                            <a class="nav-link sidebartoggler nav-icon-hover" id="headerCollapse" href="javascript:void(0)">
+                                <i class="ti ti-menu-2"></i>
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="navbar-collapse justify-content-end px-0" id="navbarNav">
+                        <ul class="navbar-nav flex-row ms-auto align-items-center justify-content-end">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link nav-icon-hover" href="javascript:void(0)" id="drop2" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <img src="~/Asset/image/profile/user-1.jpg" alt="" width="35" height="35" class="rounded-circle" />
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up" aria-labelledby="drop2">
+                                    <div class="message-body">
+                                        <a href="@Url.Action("Index","InformationAccount")" class="d-flex align-items-center gap-2 dropdown-item">
+                                            <i class="ti ti-user fs-6"></i>
+                                            <p class="mb-0  ">Thông tin</p>
+                                        </a>
+                                        <a href="/Account/Logout" class="btn btn-outline-primary mx-3 mt-2 d-block">Logout</a>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </header>
+            @RenderBody()
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    @*<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>*@
+    <script src="~/Asset/Javascript/sidebar_dashboard.js"></script>
+    <script src="~/Asset/Lib/apexchart/dist/apexcharts.min.js"></script>
+    <script src="~/Asset/Javascript/dashboard.js"></script>
+    <script src="~/Asset/Javascript/menu.js"></script>
+    <script src="~/Asset/Javascript/CommonPrivateSite.js"></script>
+
+    @RenderSection("scripts", required: false)
+    @RenderSection("scriptBrand", required: false)
+    @RenderSection("scriptAccount", required: false)
+    @RenderSection("scriptPosts", required: false)
+    @RenderSection("scriptArticle", required: false)
+    @RenderSection("scriptArticleList", required: false)
+    @RenderSection("scriptActorAndDirector", required: false)
+    @RenderSection("scriptMovieTheater", required: false)
+    @RenderSection("scriptInsertMovie", required: false)
+    @RenderSection("scriptProduct", required: false)
+    @RenderSection("scriptProfileAccount", required: false)
+    @RenderSection("scriptShowTime", required: false)
+    @RenderSection("scriptDetailAccount", required: false)
+    @RenderSection("scriptOrder", required: false)
+    @RenderSection("scriptCheckTicked", required: false)
+    @RenderSection("scriptComment", required: false)
+
+
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,238 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-6 d-flex align-items-stretch">
+            <div class="card w-100">
+                <div class="card-body p-4">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6">
+                            <h5 class="card-title fw-600 mb-4">Danh sách thương hiệu</h5>
+                        </div>
+                        <div class="col-lg-6 col-md-6">
+                        </div>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-post text-nowrap mb-0 align-middle">
+                            <thead class="text-dark fs-4">
+                                <tr>
+                                    <th>
+                                        <h6 class="fw-600 mb-0">STT</h6>
+                                    </th>
+                                    <th>
+                                        <h6 class="fw-600 mb-0">Tên thương hiệu</h6>
+                                    </th>
+                                    <th>
+                                        <h6 class="fw-600 mb-0">Mô tả</h6>
+                                    </th>
+                                    <th>
+                                        <h6 class="fw-600 mb-0">Lệnh</h6>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody id="table_brand"></tbody>
+                        </table>
+                        <div id="messageNotFind" style="margin:auto;display:none; text-align:center;">Không tìm thấy</div>
+                    </div>
+                    <div id="loading" class=" m-auto  mt-4"></div>
+                </div>
+                <div class="card-tools p-5 pt-0 pb-0 m-auto" id="pagination"></div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title fw-semibold mb-4">Thương hiệu</h5>
+                    <div class="card">
+                        <div class="card-body">
+                            <form id="form_brand" method="post">
+                                <div class="mb-3">
+                                    <label class="form-label">Mã Thương hiệu</label>
+                                    <input class="form-control" id="idBrand" disabled />
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Tên thương hiệu</label>
+                                    <input class="form-control" id="nameBrand" />
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Mô tả</label>
+                                    <input class="form-control" id="descriptionBrand" />
+                                </div>
+                                <button type="submit" class="btn btn-primary mt-2">Lưu</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scriptBrand {
+    <script>
+        var elementTable = $("#table_brand");
+        var ms = document.getElementById('messageNotFind');
+
+        $(document).ready(function () {
+            InsertBrand();
+            loadData("", 1, 3);
+
+            $("#searchBrand").on("keyup", function () {
+                var keyword = $('#searchBrand').val();
+                loadData(keyword, 1, 3);
+            });
+        });
+
+        function loadData(keyword, page, pageSize) {
+            ShowLoading(true);
+            $.ajax({
+                url: '@Url.Action("LoadData", "Brand")',
+                type: 'GET',
+                dataType: 'json',
+                data: { keyword: keyword, page: page, pageSize: pageSize },
+                success: function (response) {
+                    ShowLoading(false);
+                    if (response.status) {
+                        elementTable.empty();
+                        $.each(response.Data, function (index, brand) {
+                            elementTable.append(`
+                                <tr>
+                                    <td><h6 class="fw-600 mb-0">${brand.maTH}</h6></td>
+                                    <td><h6 class="fw-600 mb-1">${brand.tenTH}</h6></td>
+                                    <td><h6 class="fw-600 mb-1">${brand.moTa}</h6></td>
+                                    <td>
+                                        <button type="button" class="btn btn-primary" onclick="EditBrand(${brand.maTH})">Sửa</button>
+                                        <button type="button" class="btn btn-danger m-1" onclick="DeleteBrand(${brand.maTH})">Xóa</button>
+                                    </td>
+                                </tr>
+                            `);
+                        });
+                        ms.style.display = (keyword.length > 0 && response.NumberPage === 0 && response.TotalItem === 0) ? "block" : "none";
+                        Pagination(keyword, response.CurrentPage, response.NumberPage, response.PageSize);
+                    } else {
+                        ms.style.display = "block";
+                        ms.textContent = response.message;
+                    }
+                },
+                error: function (error) {
+                    ShowLoading(false);
+                    console.error(error);
+                }
+            });
+        }
+
+        function InsertBrand() {
+            $('#form_brand').submit(function (e) {
+                e.preventDefault();
+                var brand = {
+                    maTH: $("#idBrand").val(),
+                    tenTH: $("#nameBrand").val(),
+                    moTa: $("#descriptionBrand").val()
+                };
+                if (brand.tenTH) {
+                    $.ajax({
+                        url: '@Url.Action("SaveBrand", "Brand")',
+                        type: 'POST',
+                        data: brand,
+                        success: function (response) {
+                            Swal.fire({
+                                position: "center",
+                                icon: response.status ? "success" : "error",
+                                title: response.message,
+                                showConfirmButton: true,
+                                timer: 1500
+                            }).then(() => {
+                                if (response.status) {
+                                    loadData("", 1, 3);
+                                    $('#form_brand')[0].reset();
+                                    $('#idBrand').prop('disabled', false);
+                                }
+                            });
+                        },
+                        error: function () {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Lỗi',
+                                text: 'Đã xảy ra lỗi khi thêm thương hiệu.'
+                            });
+                        }
+                    });
+                } else {
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'Cảnh báo',
+                        text: 'Tên thương hiệu không được để trống.'
+                    });
+                }
+            });
+        }
+
+        function DeleteBrand(id) {
+            Swal.fire({
+                title: "Bạn chắc chắn?",
+                text: "Bạn sẽ không thể khôi phục khi đã xóa",
+                icon: "warning",
+                showCancelButton: true,
+                cancelButtonColor: "#d33",
+                cancelButtonText: "Hủy",
+                confirmButtonColor: "#3085d6",
+                confirmButtonText: "Xóa"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: '@Url.Action("Delete", "Brand")',
+                        type: 'POST',
+                        data: { id: id },
+                        success: function (response) {
+                            Swal.fire({
+                                position: "center",
+                                icon: response.status ? "success" : "error",
+                                title: response.message,
+                                showConfirmButton: true,
+                                timer: 1500
+                            }).then(() => {
+                                if (response.status) {
+                                    loadData("", 1, 3);
+                                }
+                            });
+                        },
+                        error: function (error) {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Lỗi',
+                                text: 'Đã xảy ra lỗi khi xóa thương hiệu.'
+                            });
+                            console.error(error);
+                        }
+                    });
+                }
+            });
+        }
+
+        function EditBrand(id) {
+            $.ajax({
+                url: '@Url.Action("Edit", "Brand")',
+                type: 'GET',
+                dataType: 'json',
+                data: { id: id },
+                success: function (response) {
+                    if (response.status) {
+                        $('#idBrand').val(response.data.maTH).prop('disabled', true);
+                        $('#nameBrand').val(response.data.tenTH);
+                        $('#descriptionBrand').val(response.data.moTa);
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Lỗi',
+                            text: response.message
+                        });
+                    }
+                },
+                error: function (error) {
+                    console.error('Error fetching brand data:', error);
+                }
+            });
+        }
+    </script>
+}

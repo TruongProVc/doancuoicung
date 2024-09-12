@@ -1,0 +1,155 @@
+﻿@using BanGiay.Models;
+@model BanGiay.Models.KhachHang
+@{
+    ViewBag.Title = "Payment";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    List<Cart> cartItems = Session["GioHang"] as List<Cart> ?? new List<Cart>();
+    decimal cartTotal = cartItems.Sum(item => item.tongGia);
+}
+<div class="breadcrumb-section breadcrumb-nav-color--black">
+    <div class="breadcrumb-wrapper">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <h3 class="breadcrumb-title">Thông tin thanh toán</h3>
+                    <div class="breadcrumb-nav breadcrumb-nav-color--black ">
+                        <nav aria-label="breadcrumb">
+                            <ul>
+                                <li><a href="#">Trang chủ</a></li>
+                                <li class="active" aria-current="page">Thông tin thanh toán</li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="checkout-section">
+    <div class="container">
+        <div class="row">
+            <!-- User Quick Action Form -->
+            <div class="col-12">
+                <div class="user-actions accordion" data-aos="fade-up" data-aos-delay="200">
+                    <div id="checkout_coupon" class="collapse checkout_coupon" data-parent="#checkout_coupon">
+                        <div class="checkout_info">
+                            <form action="#">
+                                <input placeholder="Coupon code" type="text">
+                                <button class="btn btn-md btn-black-default-hover" type="submit">
+                                    Apply coupon
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- User Quick Action Form -->
+        </div>
+
+        <!-- Start User Details Checkout Form -->
+        <div class="checkout_form" data-aos="fade-up" data-aos-delay="400">
+            @using (Html.BeginForm("Payment", "ThanhToan", FormMethod.Post))
+            {
+                <div class="row">
+                    <!-- Customer Details -->
+                    <div class="col-lg-6 col-md-6">
+                        <h3>Billing Details</h3>
+                        <div class="default-form-box">
+                            @Html.LabelFor(m => m.tenKH, htmlAttributes: new { @class = "control-label" })
+                            @Html.TextBoxFor(m => m.tenKH, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.tenKH, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="default-form-box">
+                            @Html.LabelFor(m => m.soDT, htmlAttributes: new { @class = "control-label" })
+                            @Html.TextBoxFor(m => m.soDT, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.soDT, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="default-form-box">
+                            @Html.LabelFor(m => m.diaChi, htmlAttributes: new { @class = "control-label" })
+                            @Html.TextAreaFor(m => m.diaChi, new { @class = "form-control", rows = 4 })
+                            @Html.ValidationMessageFor(m => m.diaChi, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="order-notes">
+                            @Html.Label("Order Notes")
+                            @Html.TextArea("orderNote", null, new { @class = "form-control", placeholder = "Notes about your order, e.g. special notes for delivery." })
+                        </div>
+                    </div>
+
+                    <!-- Order Summary -->
+                    <div class="col-lg-6 col-md-6">
+                        <h3>Your order</h3>
+                        <div class="order_table table-responsive">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Product</th>
+                                        <th>Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in cartItems)
+                                    {
+                                        <tr>
+                                            <td>@item.tenSP <strong> × @item.soLuong</strong></td>
+                                            <td>@string.Format("{0:0,0 vnđ}", item.giaSP)</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th>Total</th>
+                                        <td>@string.Format("{0:0,0 vnđ}", cartTotal)</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Shipping</th>
+                                        <td><strong>Free</strong></td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+
+                        <div class="payment_method">
+                            <div class="panel-default">
+                                <label class="checkbox-default" for="currencyCod" data-bs-toggle="collapse" data-bs-target="#methodCod">
+                                    <input type="checkbox" id="currencyCod">
+                                    <span>Cash on Delivery</span>
+                                </label>
+                                <div id="methodCod" class="collapse" data-parent="#methodCod">
+                                    <div class="card-body1">
+                                        <p>
+                                            Please send a check to Store Name, Store Street, Store Town, Store State / County, Store Postcode.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="panel-default">
+                                <label class="checkbox-default" for="currencyPaypal" data-bs-toggle="collapse" data-bs-target="#methodPaypal">
+                                    <input type="checkbox" id="currencyPaypal">
+                                    <span>PayPal</span>
+                                </label>
+                                <div id="methodPaypal" class="collapse" data-parent="#methodPaypal">
+                                    <div class="card-body1">
+                                        <p>
+                                            Pay via PayPal; you can pay with your credit card if you don’t have a PayPal account.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="order_button pt-3">
+                                <button class="btn btn-md btn-black-default-hover" type="submit">
+                                    Proceed to PayPal
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div> <!-- End User Details Checkout Form -->
+    </div>
+</div>

@@ -1,0 +1,84 @@
+﻿@using BanGiay.Models;
+@model BanGiay.ViewModel.RegisterVM
+@{
+    Layout = null;
+
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link rel="shortcut icon" type="image/png" href="~/Asset/image/logos/favicon.png" />
+    <link href="~/Asset/Lib/Bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Asset/Css/styleLogin.css" rel="stylesheet" />
+    <style>
+        .nav_link {
+            text-decoration: none;
+            color: rgb(33, 37, 41);
+            font-size: 13px;
+            opacity: 0.7;
+        }
+
+            .nav_link:hover {
+                color: red;
+            }
+    </style>
+</head>
+
+<body>
+    <div class="main">
+        @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form", id = "formRegister" }))
+        {
+            @Html.AntiForgeryToken()
+            <h3 class="heading">Thành viên đăng ký</h3>
+            <p class="desc">Titans Cinema</p>
+            <div class="spacer"></div>
+            <div class="row">
+                <div class="col-6">
+                    <div class="form-group">
+                        <label for="lastName" class="form-label">Họ</label>
+                        @Html.TextBoxFor(d => d.lastName, new { @class = "form-control", placeholder = "Nhập họ...", name = "lastName" })
+                        @Html.ValidationMessageFor(d => d.lastName)
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-group">
+                        <label for="firstName" class="form-label">Tên</label>
+                        @Html.TextBoxFor(d => d.firstName, new { @class = "form-control", placeholder = "Nhập tên...", name = "firstName" })
+                        @Html.ValidationMessageFor(d => d.lastName)
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="email" class="form-label">Email</label>
+                @Html.TextBoxFor(d => d.email, new { @class = "form-control", placeholder = "Nhập email...", name = "email", type = "email" })
+                @Html.ValidationMessageFor(d => d.email)
+
+            </div>
+            <div class="form-group">
+                <label for="numberPhone" class="form-label">Số điện thoai</label>
+                @Html.TextBoxFor(d => d.numberPhone, new { @class = "form-control", placeholder = "Nhập số điện thoại...", name = "numberPhone" })
+                @Html.ValidationMessageFor(d => d.numberPhone)
+            </div>
+            <div class="form-group">
+                <label for="password" class="form-label">Mật khẩu</label>
+                @Html.PasswordFor(d => d.passWord, new { @class = "form-control", placeholder = "Nhập mật khẩu...", name = "password" })
+                @Html.ValidationMessageFor(d => d.passWord)
+            </div>
+
+            <div class="form-group">
+                <label for="password_confirmation" class="form-label">Nhập lại mật khẩu</label>
+                @Html.PasswordFor(d => d.comfirmPassword, new { @class = "form-control", placeholder = "Nhập lại mật khẩu...", name = "password_confirmation" })
+                @Html.ValidationMessageFor(d => d.comfirmPassword)
+            </div>
+            <a href="@Url.Action("ForgotPassword", "Account")" class="nav_link" style="float:left; padding-left:5px;">Quên mật khẩu ?</a>
+            <a href="@Url.Action("Login","Account")" class="nav_link" style="float:right;padding-right:5px;">Đăng nhập</a>
+            <div class="spacer"></div>
+            <button type="submit" class="form-submit">Đăng ký</button>
+        }
+    </div>
+</body>
+</html>

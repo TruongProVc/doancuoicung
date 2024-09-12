@@ -1,0 +1,255 @@
+﻿@model BanGiay.Models.SanPham
+@using BanGiay.Models;
+
+@{
+    ViewBag.Title = "Chi Tiết Sản Phẩm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    List<BinhLuan> bl = ViewData["dsbl"] as List<BinhLuan>;
+    List<SizeGiay> sz = ViewData["dssz"] as List<SizeGiay>;
+}
+<style>
+    .comment-item {
+        margin-bottom: 20px; /* Adjust the spacing as needed */
+        font-weight: bold; /* Make text bold */
+    }
+
+    .comment-wrapper {
+        padding: 15px; /* Add padding for better visual separation */
+        border: 1px solid #ddd; /* Add a border for visual separation */
+        border-radius: 5px; /* Optional: Add rounded corners */
+        background-color: #f9f9f9; /* Optional: Add a background color */
+    }
+
+    .comment-content-top {
+        margin-bottom: 10px; /* Space between top section and comment content */
+    }
+
+    .comment-content-left h6 {
+        margin: 0; /* Remove default margin */
+        font-weight: bold; /* Make account ID text bold */
+    }
+
+    .para-content p {
+        margin: 0; /* Remove default margin */
+        font-weight: bold; /* Make comment text bold */
+        color: #333; /* Optional: Change text color */
+    }
+</style>
+<div class="breadcrumb-section breadcrumb-nav-color--black">
+    <div class="breadcrumb-wrapper">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <h3 class="breadcrumb-title">Chi tiết sản phẩm</h3>
+                    <div class="breadcrumb-nav breadcrumb-nav-color--black">
+                        <nav aria-label="breadcrumb">
+                            <ul>
+                                <li><a href="#">Trang chủ</a></li>
+                                <li class="active" aria-current="page">Chi tiết sản phẩm</li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="product-details-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-5 col-lg-6">
+                <div class="product-details-gallery-area" data-aos="fade-up" data-aos-delay="0">
+                    <div class="product-large-image product-large-image-horizontal swiper-container">
+                        <div class="swiper-wrapper">
+                            <div class="product-image-large-image">
+                                <img src="@Model.hinhSanPham" alt="Product Image">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="product-image-thumb product-image-thumb-horizontal swiper-container">
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-7 col-lg-6">
+                <div class="product-details-content-area product-details--golden" data-aos="fade-up" data-aos-delay="200">
+                    <div class="product-details-text">
+                        <h4 class="title">@Model.tenSanPham</h4>
+                        <div class="d-flex align-items-center">
+                        </div>
+                        <div class="price">@String.Format("{0:0,0} ₫", Model.giaTien)</div>
+                        <p>@Model.moTa</p>
+                    </div>
+                    <div class="product-details-variable">
+                        <h4 class="title">Available Options</h4>
+                        <div class="variable-single-item">
+                            <div class="product-stock">
+                                <span class="product-stock-in">
+                                    <i class="ion-checkmark-circled"></i>
+                                </span> 200 IN STOCK
+                            </div>
+                        </div>
+                        <div class="variable-single-item">
+                            <span>Size</span>
+                            <select class="product-variable-size">
+                                <option selected value="1">size in option</option>
+                                @if (sz != null && sz.Any())
+                                {
+                                    foreach (var item in sz)
+                                    {
+                                        <option value="@item.maSize">@item.size</option>
+                                    }
+                                }
+                                else
+                                {
+                                    <option value="">No sizes available</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <div class="product-add-to-cart-btn">
+                                <a href="@Url.Action("AddItem", "ThanhToan", new { maSP = Model.maSanPham })" class="btn btn-primary">Thanh Toán</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="product-details-social">
+                        <span class="title">SHARE THIS PRODUCT:</span>
+                        <ul>
+                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                            <li><a href="#"><i class="fa fa-pinterest"></i></a></li>
+                            <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                            <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="product-details-content-tab-section section-top-gap-100">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="product-details-content-tab-wrapper" data-aos="fade-up" data-aos-delay="0">
+                    <ul class="nav tablist product-details-content-tab-btn d-flex justify-content-center">
+                        <li><a class="nav-link active" data-bs-toggle="tab" href="#review">Reviews</a></li>
+                    </ul>
+
+                    <div class="product-details-content-tab">
+                        <div class="tab-content">
+                            <div class="tab-pane active show" id="review">
+                                <div class="single-tab-content-item">
+                                    @if (bl != null && bl.Any())
+                                    {
+                                        <ul id="comment-list" class="comment-list">
+                                            @foreach (var item in bl)
+                                            {
+                                                if (item.idSanPham == Model.maSanPham.ToString())
+                                                {
+                                                    <li class="comment-item">
+                                                        <div class="comment-wrapper">
+                                                            <div class="comment-content">
+                                                                <div class="comment-content-top">
+                                                                    <div class="comment-content-left">
+                                                                        <h6 class="comment-name">ID tài khoản: @item.idTaiKhoan</h6>
+                                                                        @if (item.ngayDang.HasValue)
+                                                                        {
+                                                                            @item.ngayDang.Value.ToString("dd/MM/yyyy HH:mm:ss")
+                                                                        }
+                                                                        else
+                                                                        {
+                                                                            <span>Chưa xác định</span>
+                                                                        }
+                                                                    </div>
+                                                                </div>
+                                                                <div class="para-content">
+                                                                    <p>Bình luận: <span style="color:red;">@item.noiDung</span></p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                }
+                                            }
+                                        </ul>
+                                    }
+                                    else
+                                    {
+                                        <p>No comments available.</p>
+                                    }
+                                </div>
+
+                                <div class="review-form">
+                                    <div class="review-form-text-top">
+                                        <h5>Thêm bình luận</h5>
+                                    </div>
+                                    @using (Html.BeginForm("Create", "ProductDetails", FormMethod.Post, new { id = "commentForm" }))
+                                    {
+                                        @Html.AntiForgeryToken()
+                                        <input type="hidden" name="idSanPham" value="@Model.maSanPham" />
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div class="default-form-box">
+                                                    <textarea id="comment-review-text" name="noiDung1" placeholder="Viết bình luận..." required></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="col-12">
+                                                <button class="btn btn-md btn-pink" type="submit">Gửi</button>
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
+
+                                <script>
+                                    $(document).ready(function () {
+                                        $("#commentForm").submit(function (event) {
+                                            event.preventDefault();
+
+                                            $.ajax({
+                                                type: $(this).attr("method"),
+                                                url: $(this).attr("action"),
+                                                data: $(this).serialize(),
+                                                success: function (response) {
+                                                    if (response.success) {
+                                                        $("#comment-review-text").val("");
+                                                        $("#comment-list").empty();
+
+                                                        $.each(response.comments, function (index, comment) {
+                                                            var commentHtml = `
+                                                                                                                            <li class="comment-item">
+                                                                                                                                <div class="comment-wrapper">
+                                                                                                                                    <div class="comment-content">
+                                                                                                                                        <div class="comment-content-top">
+                                                                                                                                            <div class="comment-content-left">
+                                                                                                                                                <h6 class="comment-name">ID tài khoản: ${comment.idTaiKhoan}</h6>
+                                                                                                                                                <small>${comment.ngayDang}</small>
+                                                                                                                                            </div>
+                                                                                                                                        </div>
+                                                                                                                                        <div class="para-content">
+                                                                                                                                            <p>Bình luận: <span style="color:red;">${comment.noiDung}</span></p>
+                                                                                                                                        </div>
+                                                                                                                                    </div>
+                                                                                                                                </div>
+                                                                                                                            </li>`;
+                                                            $("#comment-list").append(commentHtml);
+                                                        });
+                                                    } else {
+                                                        alert("Vui lòng đăng nhập để bình luận.");
+                                                    }
+                                                },
+                                                error: function () {
+                                                    alert("Có lỗi xảy ra khi gửi bình luận. Vui lòng thử lại.");
+                                                }
+                                            });
+                                        });
+                                    });
+                                </script>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

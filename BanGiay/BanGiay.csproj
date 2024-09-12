@@ -1,0 +1,1278 @@
+﻿<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{CE06A784-ED84-4B53-B566-92E87677DA0E}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>BanGiay</RootNamespace>
+    <AssemblyName>BanGiay</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System.Web.Razor">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.7\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Webpages">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.7\lib\net45\System.Web.Webpages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Webpages.Deployment">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.7\lib\net45\System.Web.Webpages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Webpages.Razor">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.7\lib\net45\System.Web.Webpages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Helpers">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.7\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.7\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Asset\adminsite\assets\demo\chart-area-demo.js" />
+    <Content Include="Asset\adminsite\assets\demo\chart-bar-demo.js" />
+    <Content Include="Asset\adminsite\assets\demo\chart-pie-demo.js" />
+    <Content Include="Asset\adminsite\assets\demo\datatables-demo.js" />
+    <Content Include="Asset\adminsite\assets\img\error-404-monochrome.svg" />
+    <Content Include="Asset\adminsite\css\styles.css" />
+    <Content Include="Asset\adminsite\js\datatables-simple-demo.js" />
+    <Content Include="Asset\adminsite\js\scripts.js" />
+    <Content Include="Asset\assets\css\plugins\animate.min.css" />
+    <Content Include="Asset\assets\css\plugins\aos.min.css" />
+    <Content Include="Asset\assets\css\plugins\jquery.lineProgressbar.css" />
+    <Content Include="Asset\assets\css\plugins\nice-select.css" />
+    <Content Include="Asset\assets\css\plugins\plugins.min.css" />
+    <Content Include="Asset\assets\css\plugins\swiper-bundle.min.css" />
+    <Content Include="Asset\assets\css\plugins\venobox.min.css" />
+    <Content Include="Asset\assets\css\style.css" />
+    <Content Include="Asset\assets\css\style.min.css" />
+    <Content Include="Asset\assets\css\vendor\font-awesome.min.css" />
+    <Content Include="Asset\assets\css\vendor\images\ui-icons_444444_256x240.png" />
+    <Content Include="Asset\assets\css\vendor\images\ui-icons_555555_256x240.png" />
+    <Content Include="Asset\assets\css\vendor\images\ui-icons_777620_256x240.png" />
+    <Content Include="Asset\assets\css\vendor\images\ui-icons_777777_256x240.png" />
+    <Content Include="Asset\assets\css\vendor\images\ui-icons_cc0000_256x240.png" />
+    <Content Include="Asset\assets\css\vendor\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Asset\assets\css\vendor\ionicons.css" />
+    <Content Include="Asset\assets\css\vendor\jquery-ui.min.css" />
+    <Content Include="Asset\assets\css\vendor\simple-line-icons.css" />
+    <Content Include="Asset\assets\css\vendor\vendor.min.css" />
+    <Content Include="Asset\assets\fonts\font-awesome\fontawesome-webfont3e6e.svg" />
+    <Content Include="Asset\assets\fonts\ionicon-fonts\ionicons28b5.svg" />
+    <Content Include="Asset\assets\fonts\simple-line-icon-fonts\Simple-Line-Iconsb26c.svg" />
+    <Content Include="Asset\assets\images\about\a73e00bf-c3e5-43c5-a17d-22ebb5ecea97.jpg" />
+    <Content Include="Asset\assets\images\about\img-about.jpg" />
+    <Content Include="Asset\assets\images\banner\banner-style-1-img-1.jpg" />
+    <Content Include="Asset\assets\images\banner\banner-style-10-img-1.jpg" />
+    <Content Include="Asset\assets\images\banner\banner-style-11-img-1.jpg" />
+    <Content Include="Asset\assets\images\banner\banner-style-11-img-2.jpg" />
+    <Content Include="Asset\assets\images\banner\banner-style-12-img-1.jpg" />
+    <Content Include="Asset\assets\images\banner\banner-style-13-img-1.jpg" />
+    <Content Include="Asset\assets\images\banner\banner-style-2-img-1.jpg" />
+    <Content Include="Asset\assets\images\banner\banner-style-2-img-2.jpg" />
+    <Content Include="Asset\assets\images\banner\banner-style-2-img-3.jpg" />
+    <Content Include="Asset\assets\images\banner\banner-style-2-img-4.jpg" />
+    <Content Include="Asset\assets\images\banner\banner-style-3-img-1.jpg" />
+    <Content Include="Asset\assets\images\banner\banner-style-4-img-1.jpg" />
+    <Content Include="Asset\assets\images\banner\banner-style-4-img-2.jpg" />
+    <Content Include="Asset\assets\images\banner\banner-style-4-img-3.jpg" />
+    <Content Include="Asset\assets\images\banner\banner-style-4-img-4.jpg" />
+    <Content Include="Asset\assets\images\banner\banner-style-4-img-5.jpg" />
+    <Content Include="Asset\assets\images\banner\banner-style-4-img-6.jpg" />
+    <Content Include="Asset\assets\images\banner\banner-style-4-img-7.jpg" />
+    <Content Include="Asset\assets\images\banner\banner-style-4-img-8.jpg" />
+    <Content Include="Asset\assets\images\banner\banner-style-5-img-1.jpg" />
+    <Content Include="Asset\assets\images\banner\banner-style-5-img-2.jpg" />
+    <Content Include="Asset\assets\images\banner\banner-style-5-img-3.jpg" />
+    <Content Include="Asset\assets\images\banner\banner-style-6-img-1.jpg" />
+    <Content Include="Asset\assets\images\banner\banner-style-7-img-1.jpg" />
+    <Content Include="Asset\assets\images\banner\banner-style-7-img-2.jpg" />
+    <Content Include="Asset\assets\images\banner\banner-style-7-img-3.jpg" />
+    <Content Include="Asset\assets\images\banner\banner-style-8-img-1.jpg" />
+    <Content Include="Asset\assets\images\banner\banner-style-8-img-2.jpg" />
+    <Content Include="Asset\assets\images\banner\banner-style-9-img-1.jpg" />
+    <Content Include="Asset\assets\images\banner\menu-banner.jpg" />
+    <Content Include="Asset\assets\images\banner\side-banner.jpg" />
+    <Content Include="Asset\assets\images\blog\blog-grid-home-1-img-1.jpg" />
+    <Content Include="Asset\assets\images\blog\blog-grid-home-1-img-2.jpg" />
+    <Content Include="Asset\assets\images\blog\blog-grid-home-1-img-3.jpg" />
+    <Content Include="Asset\assets\images\blog\blog-grid-home-1-img-4.jpg" />
+    <Content Include="Asset\assets\images\blog\blog-grid-home-1-img-5.jpg" />
+    <Content Include="Asset\assets\images\blog\blog-grid-home-1-img-6.jpg" />
+    <Content Include="Asset\assets\images\company-logo\company-logo-1.png" />
+    <Content Include="Asset\assets\images\company-logo\company-logo-2.png" />
+    <Content Include="Asset\assets\images\company-logo\company-logo-3.png" />
+    <Content Include="Asset\assets\images\company-logo\company-logo-4.png" />
+    <Content Include="Asset\assets\images\company-logo\company-logo-5.png" />
+    <Content Include="Asset\assets\images\company-logo\company-logo-6.png" />
+    <Content Include="Asset\assets\images\company-logo\company-logo-7.png" />
+    <Content Include="Asset\assets\images\company-logo\company-logo-8.png" />
+    <Content Include="Asset\assets\images\company-logo\payment.png" />
+    <Content Include="Asset\assets\images\emprt-cart\empty-cart.png" />
+    <Content Include="Asset\assets\images\favicon.ico" />
+    <Content Include="Asset\assets\images\hero-slider\home-1\hero-slider-1.jpg" />
+    <Content Include="Asset\assets\images\hero-slider\home-1\hero-slider-2.jpg" />
+    <Content Include="Asset\assets\images\hero-slider\home-2\hero-slider-1.jpg" />
+    <Content Include="Asset\assets\images\hero-slider\home-2\hero-slider-2.jpg" />
+    <Content Include="Asset\assets\images\hero-slider\home-3\hero-slider-1.jpg" />
+    <Content Include="Asset\assets\images\hero-slider\home-3\hero-slider-2.jpg" />
+    <Content Include="Asset\assets\images\hero-slider\home-3\pexels-cottonbro-6153367.jpg" />
+    <Content Include="Asset\assets\images\hero-slider\home-3\pexels-craytive-1478442.jpg" />
+    <Content Include="Asset\assets\images\hero-slider\home-3\pexels-ingo-609771.jpg" />
+    <Content Include="Asset\assets\images\hero-slider\home-3\pexels-mnzoutfits-1598505.jpg" />
+    <Content Include="Asset\assets\images\hero-slider\home-4\hero-slider-1.jpg" />
+    <Content Include="Asset\assets\images\hero-slider\home-4\hero-slider-2.jpg" />
+    <Content Include="Asset\assets\images\icons\bkg_grid.png" />
+    <Content Include="Asset\assets\images\icons\bkg_list.png" />
+    <Content Include="Asset\assets\images\icons\icon_about1.jpg" />
+    <Content Include="Asset\assets\images\icons\icon_about2.jpg" />
+    <Content Include="Asset\assets\images\icons\icon_about3.jpg" />
+    <Content Include="Asset\assets\images\icons\icon_about4.jpg" />
+    <Content Include="Asset\assets\images\icons\service-promo-1.png" />
+    <Content Include="Asset\assets\images\icons\service-promo-2.png" />
+    <Content Include="Asset\assets\images\icons\service-promo-3.png" />
+    <Content Include="Asset\assets\images\icons\service-promo-4.png" />
+    <Content Include="Asset\assets\images\icons\service-promo-5.png" />
+    <Content Include="Asset\assets\images\icons\service-promo-6.png" />
+    <Content Include="Asset\assets\images\icons\service-promo-7.png" />
+    <Content Include="Asset\assets\images\icons\service-promo-8.png" />
+    <Content Include="Asset\assets\images\icons\top-arrow.svg" />
+    <Content Include="Asset\assets\images\instagram\instagram-1.jpg" />
+    <Content Include="Asset\assets\images\instagram\instagram-2.jpg" />
+    <Content Include="Asset\assets\images\instagram\instagram-3.jpg" />
+    <Content Include="Asset\assets\images\instagram\instagram-4.jpg" />
+    <Content Include="Asset\assets\images\instagram\instagram-5.jpg" />
+    <Content Include="Asset\assets\images\instagram\instagram-6.jpg" />
+    <Content Include="Asset\assets\images\logo\1.png" />
+    <Content Include="Asset\assets\images\logo\H&amp;C.png" />
+    <Content Include="Asset\assets\images\logo\logo_black.png" />
+    <Content Include="Asset\assets\images\logo\logo_white.png" />
+    <Content Include="Asset\assets\images\product\Adidas1.jpg" />
+    <Content Include="Asset\assets\images\product\Adidas2.jpg" />
+    <Content Include="Asset\assets\images\product\CV1.jpg" />
+    <Content Include="Asset\assets\images\product\default\home-1\default-1.jpg" />
+    <Content Include="Asset\assets\images\product\default\home-1\default-10.jpg" />
+    <Content Include="Asset\assets\images\product\default\home-1\default-11.jpg" />
+    <Content Include="Asset\assets\images\product\default\home-1\default-12.jpg" />
+    <Content Include="Asset\assets\images\product\default\home-1\default-2.jpg" />
+    <Content Include="Asset\assets\images\product\default\home-1\default-3.jpg" />
+    <Content Include="Asset\assets\images\product\default\home-1\default-4.jpg" />
+    <Content Include="Asset\assets\images\product\default\home-1\default-5.jpg" />
+    <Content Include="Asset\assets\images\product\default\home-1\default-6.jpg" />
+    <Content Include="Asset\assets\images\product\default\home-1\default-7.jpg" />
+    <Content Include="Asset\assets\images\product\default\home-1\default-8.jpg" />
+    <Content Include="Asset\assets\images\product\default\home-1\default-9.jpg" />
+    <Content Include="Asset\assets\images\product\default\home-2\default-1.jpg" />
+    <Content Include="Asset\assets\images\product\default\home-2\default-10.jpg" />
+    <Content Include="Asset\assets\images\product\default\home-2\default-11.jpg" />
+    <Content Include="Asset\assets\images\product\default\home-2\default-12.jpg" />
+    <Content Include="Asset\assets\images\product\default\home-2\default-13.jpg" />
+    <Content Include="Asset\assets\images\product\default\home-2\default-14.jpg" />
+    <Content Include="Asset\assets\images\product\default\home-2\default-15.jpg" />
+    <Content Include="Asset\assets\images\product\default\home-2\default-16.jpg" />
+    <Content Include="Asset\assets\images\product\default\home-2\default-17.jpg" />
+    <Content Include="Asset\assets\images\product\default\home-2\default-18.jpg" />
+    <Content Include="Asset\assets\images\product\default\home-2\default-2.jpg" />
+    <Content Include="Asset\assets\images\product\default\home-2\default-3.jpg" />
+    <Content Include="Asset\assets\images\product\default\home-2\default-4.jpg" />
+    <Content Include="Asset\assets\images\product\default\home-2\default-5.jpg" />
+    <Content Include="Asset\assets\images\product\default\home-2\default-6.jpg" />
+    <Content Include="Asset\assets\images\product\default\home-2\default-7.jpg" />
+    <Content Include="Asset\assets\images\product\default\home-2\default-8.jpg" />
+    <Content Include="Asset\assets\images\product\default\home-2\default-9.jpg" />
+    <Content Include="Asset\assets\images\product\default\home-3\62ee520dca03e.jpg" />
+    <Content Include="Asset\assets\images\product\default\home-3\adidas1.jpg" />
+    <Content Include="Asset\assets\images\product\default\home-3\adidas2.jpg" />
+    <Content Include="Asset\assets\images\product\default\home-3\adidas3.jpg" />
+    <Content Include="Asset\assets\images\product\default\home-3\adidas4.jpg" />
+    <Content Include="Asset\assets\images\product\default\home-3\adidas5.jpg" />
+    <Content Include="Asset\assets\images\product\default\home-3\default-1.jpg" />
+    <Content Include="Asset\assets\images\product\default\home-3\default-10.jpg" />
+    <Content Include="Asset\assets\images\product\default\home-3\default-11.jpg" />
+    <Content Include="Asset\assets\images\product\default\home-3\default-2.jpg" />
+    <Content Include="Asset\assets\images\product\default\home-3\default-3.jpg" />
+    <Content Include="Asset\assets\images\product\default\home-3\default-4.jpg" />
+    <Content Include="Asset\assets\images\product\default\home-3\default-5.jpg" />
+    <Content Include="Asset\assets\images\product\default\home-3\default-6.jpg" />
+    <Content Include="Asset\assets\images\product\default\home-3\default-7.jpg" />
+    <Content Include="Asset\assets\images\product\default\home-3\default-8.jpg" />
+    <Content Include="Asset\assets\images\product\default\home-3\default-9.jpg" />
+    <Content Include="Asset\assets\images\product\default\home-4\default-1.jpg" />
+    <Content Include="Asset\assets\images\product\default\home-4\default-10.jpg" />
+    <Content Include="Asset\assets\images\product\default\home-4\default-11.jpg" />
+    <Content Include="Asset\assets\images\product\default\home-4\default-2.jpg" />
+    <Content Include="Asset\assets\images\product\default\home-4\default-3.jpg" />
+    <Content Include="Asset\assets\images\product\default\home-4\default-4.jpg" />
+    <Content Include="Asset\assets\images\product\default\home-4\default-5.jpg" />
+    <Content Include="Asset\assets\images\product\default\home-4\default-6.jpg" />
+    <Content Include="Asset\assets\images\product\default\home-4\default-7.jpg" />
+    <Content Include="Asset\assets\images\product\default\home-4\default-8.jpg" />
+    <Content Include="Asset\assets\images\product\default\home-4\default-9.jpg" />
+    <Content Include="Asset\assets\images\product\NB1.jpg" />
+    <Content Include="Asset\assets\images\product\Nike1.jpg" />
+    <Content Include="Asset\assets\images\team\leader1.png" />
+    <Content Include="Asset\assets\images\team\leader2.png" />
+    <Content Include="Asset\assets\images\team\leader3.png" />
+    <Content Include="Asset\assets\images\team\leader4.png" />
+    <Content Include="Asset\assets\images\user\image-1.png" />
+    <Content Include="Asset\assets\images\user\image-2.png" />
+    <Content Include="Asset\assets\images\user\image-3.png" />
+    <Content Include="Asset\assets\js\JavaScriptAutoSearch.js" />
+    <Content Include="Asset\assets\js\JavaScriptAutoSearching.js" />
+    <Content Include="Asset\assets\js\main.js" />
+    <Content Include="Asset\assets\js\plugins\ajax-mail.js" />
+    <Content Include="Asset\assets\js\plugins\aos.min.js" />
+    <Content Include="Asset\assets\js\plugins\jquery.instagramFeed.js" />
+    <Content Include="Asset\assets\js\plugins\jquery.lineProgressbar.js" />
+    <Content Include="Asset\assets\js\plugins\jquery.nice-select.min.js" />
+    <Content Include="Asset\assets\js\plugins\jquery.waypoints.js" />
+    <Content Include="Asset\assets\js\plugins\jquery.zoom.min.js" />
+    <Content Include="Asset\assets\js\plugins\material-scrolltop.js" />
+    <Content Include="Asset\assets\js\plugins\plugins.min.js" />
+    <Content Include="Asset\assets\js\plugins\swiper-bundle.min.js" />
+    <Content Include="Asset\assets\js\plugins\venobox.min.js" />
+    <Content Include="Asset\assets\js\vendor\bootstrap.min.js" />
+    <Content Include="Asset\assets\js\vendor\jquery-3.5.1.min.js" />
+    <Content Include="Asset\assets\js\vendor\jquery-migrate-3.3.0.min.js" />
+    <Content Include="Asset\assets\js\vendor\jquery-ui.min.js" />
+    <Content Include="Asset\assets\js\vendor\modernizr-3.11.2.min.js" />
+    <Content Include="Asset\assets\js\vendor\popper.min.js" />
+    <Content Include="Asset\assets\js\vendor\vendor.min.js" />
+    <Content Include="Asset\Css\icons\tabler-icons\fonts\tabler-icons.svg" />
+    <Content Include="Asset\Css\icons\tabler-icons\tabler-icons.css" />
+    <Content Include="Asset\Css\plugins.css" />
+    <Content Include="Asset\Css\style.css" />
+    <Content Include="Asset\Css\styleBuyTicket.css" />
+    <Content Include="Asset\Css\styleLogin.css" />
+    <Content Include="Asset\Css\stylePayment.css" />
+    <Content Include="Asset\Css\styles.css" />
+    <Content Include="Asset\Css\styles.min.css" />
+    <Content Include="Asset\Css\styleseat.css" />
+    <Content Include="Asset\image\article\00778fea-fe3a-44bc-8f2e-b702b5158be1.jpg" />
+    <Content Include="Asset\image\article\010b5d96-0a7e-45c2-aa9f-edf909dffe0c.png" />
+    <Content Include="Asset\image\article\0362c460-df74-40e4-b90f-5df78b0cb667.jpg" />
+    <Content Include="Asset\image\article\054c9518-98d7-42e3-85a7-6f998013e9a0.png" />
+    <Content Include="Asset\image\article\05eb58fc-7578-46a4-afa3-e0af616b27ce.png" />
+    <Content Include="Asset\image\article\0c2e33dd-9795-4343-9f31-5b8cd62b86f9.png" />
+    <Content Include="Asset\image\article\0d982b15-c9f2-4e67-a352-19a4877b0eb3.png" />
+    <Content Include="Asset\image\article\118a6a4a-c7c3-42d5-b582-61db9e281a52.jpg" />
+    <Content Include="Asset\image\article\14e52a32-6605-48b5-bfde-402c55328e7e.JPG" />
+    <Content Include="Asset\image\article\16528cbc-5dcb-4376-8f25-66c9f7c21383.png" />
+    <Content Include="Asset\image\article\245a4605-8584-4f0e-9be6-75cf85de9457.png" />
+    <Content Include="Asset\image\article\2d872224-5279-4422-aa91-f9ebde26a235.jpg" />
+    <Content Include="Asset\image\article\40dcadc1-fe60-4faa-a01e-62849cf058d2.png" />
+    <Content Include="Asset\image\article\54fdb0c2-f9e9-48db-aa40-73b711e487c6.png" />
+    <Content Include="Asset\image\article\57adf702-ca33-4212-ab51-5e564018524c.png" />
+    <Content Include="Asset\image\article\5dea36d5-013f-474b-99c6-c730dbc3c600.png" />
+    <Content Include="Asset\image\article\5dfca62b-1fa3-4f09-ae3f-3327e1965a97.png" />
+    <Content Include="Asset\image\article\618f5d11-28ed-492d-b5ad-30f23ab19d5e.png" />
+    <Content Include="Asset\image\article\67d8a80f-d555-49f4-bb07-ed6ef262b41a.png" />
+    <Content Include="Asset\image\article\700a5d22-aab2-4aab-a781-9e100e644e38.png" />
+    <Content Include="Asset\image\article\796c89ab-7ade-41a6-a487-65f573a66925.png" />
+    <Content Include="Asset\image\article\7da76df4-6d30-40ee-a72a-46eeead08dce.png" />
+    <Content Include="Asset\image\article\89d6280a-d724-4161-9b61-3ceab1021b4a.jpg" />
+    <Content Include="Asset\image\article\89f3f9a5-b8e6-405e-b87b-50343164818a.jpg" />
+    <Content Include="Asset\image\article\9292662d-8b01-499b-8fbe-80a9205821ed.jpg" />
+    <Content Include="Asset\image\article\b1865b04-04d4-4f09-b1d0-e3d4310b67ae.png" />
+    <Content Include="Asset\image\article\b67e8479-d0f6-4488-bbca-67380032daa2.jpg" />
+    <Content Include="Asset\image\article\b729b6b0-517c-403b-840a-4de34ef04a71.png" />
+    <Content Include="Asset\image\article\ba8c5f62-2644-4bbf-adb4-2df39ce806f5.jpg" />
+    <Content Include="Asset\image\article\bd9370ff-1041-44a8-9274-f0939213da6c.jpeg" />
+    <Content Include="Asset\image\article\bf16db71-1855-4aad-a925-89ab2aaaa14a.png" />
+    <Content Include="Asset\image\article\c06bfc3f-6676-4dc1-b9f1-896484dc5672.png" />
+    <Content Include="Asset\image\article\c2336231-f0f4-4075-aa7a-2bd40406bbaa.png" />
+    <Content Include="Asset\image\article\c373dc90-3c0b-463d-ac75-e6e1400b5d57.png" />
+    <Content Include="Asset\image\article\c43829ce-7c77-4a84-9417-c0662db5cdca.png" />
+    <Content Include="Asset\image\article\d163ec47-e08f-44a5-aef9-137b8639ac3f.JPG" />
+    <Content Include="Asset\image\article\dcc43933-fe69-42bb-8196-480fa4182f13.png" />
+    <Content Include="Asset\image\article\dcfb606c-a7bb-4bfb-9c6c-b1c54780b5a4.jpg" />
+    <Content Include="Asset\image\article\ddc3fa6d-2e12-423b-880e-7be9c78023ef.png" />
+    <Content Include="Asset\image\article\e5f24f9f-6a65-45ec-a9cb-5a3f4db580f1.png" />
+    <Content Include="Asset\image\article\e86062f0-9ec9-4855-b505-ccafe898f6b8.jpg" />
+    <Content Include="Asset\image\article\e8e3a4e8-a3e0-43d8-80cd-6747e77a7887.png" />
+    <Content Include="Asset\image\article\ea68f2b9-8622-4269-8fcf-65ab9c0c87bf.jpg" />
+    <Content Include="Asset\image\article\ee61cbbc-ac42-4035-825b-e54600da142c.png" />
+    <Content Include="Asset\image\article\f00495c4-ab07-4671-a073-5223bd5bf7fd.png" />
+    <Content Include="Asset\image\article\f3121bc4-5db9-4705-8528-c8d371e29734.png" />
+    <Content Include="Asset\image\article\f5257620-d30a-41f1-9ed5-94ff397a0def.png" />
+    <Content Include="Asset\image\article\f7573333-aba4-4fd1-9676-e9e00d8265bd.png" />
+    <Content Include="Asset\image\article\fcede658-17b3-4eee-87db-831146a9105c.png" />
+    <Content Include="Asset\image\article\fe68a093-e17c-439a-9cba-ba4e89a4b9d1.png" />
+    <Content Include="Asset\image\backgrounds\rocket.png" />
+    <Content Include="Asset\image\logos\dark-logo.svg" />
+    <Content Include="Asset\image\logos\favicon.png" />
+    <Content Include="Asset\image\movie\09f34f55-5fc7-4b29-8c97-64cce785c103.jpg" />
+    <Content Include="Asset\image\movie\1fc41ea0-732a-4a99-a9f5-b681801df314.jpg" />
+    <Content Include="Asset\image\movie\22c90dd9-7890-45f1-9711-96b2fb007c3e.jpg" />
+    <Content Include="Asset\image\movie\2f00d897-be96-49e5-935f-70912eac594b.jpg" />
+    <Content Include="Asset\image\movie\30e200bd-eccb-444c-8715-3d0481949b40.jpg" />
+    <Content Include="Asset\image\movie\3d142d78-a339-4f4f-8d6f-6049b4f2301e.jpg" />
+    <Content Include="Asset\image\movie\40ccff47-7f6a-452f-ba54-79c3d15f18fc.jpg" />
+    <Content Include="Asset\image\movie\69143475-adec-4cff-9da0-554256580eb0.jpg" />
+    <Content Include="Asset\image\movie\6c7f61ed-3427-4f7e-82b6-d04312655a5f.jpg" />
+    <Content Include="Asset\image\movie\870b79bf-7a2b-45ce-8f22-8d69a9fd3a89.jpg" />
+    <Content Include="Asset\image\movie\89e8ce8f-6c8e-4fd7-a564-a4ea8df5e97c.jpg" />
+    <Content Include="Asset\image\movie\8daf5463-0bcc-482f-bde0-344cbdb95361.jpg" />
+    <Content Include="Asset\image\movie\8ec47cfe-ee34-4f3d-9713-a602b2e2b54d.jpg" />
+    <Content Include="Asset\image\movie\913b414f-41cd-4da8-9589-8832e5fe156d.jpg" />
+    <Content Include="Asset\image\movie\95cc4a07-05c4-424f-8aa4-fa7fc222c7b3.jpg" />
+    <Content Include="Asset\image\movie\ae80d7b9-d13d-4d4b-959c-211c88b489c4.jpg" />
+    <Content Include="Asset\image\movie\b54ee722-3686-4284-bf8b-f333a4a0408d.jpg" />
+    <Content Include="Asset\image\movie\ca25208e-82e8-42f8-a5f8-3362696f0c70.jpg" />
+    <Content Include="Asset\image\movie\cb9f48b8-e815-4668-a4ff-598b5801ff48.jpg" />
+    <Content Include="Asset\image\movie\d7170703-c9b0-4ba4-ab1a-0f2c57c7eea9.jpg" />
+    <Content Include="Asset\image\movie\fd3b8c3c-a50e-4b03-9cb5-0705245d4533.jpg" />
+    <Content Include="Asset\image\profile\360_F_229758328_7x8jwCwjtBMmC6rgFzLFhZoEpLobB6L8.jpg" />
+    <Content Include="Asset\image\profile\png-transparent-user-profile-computer-icons-login-user-avatars-thumbnail.png" />
+    <Content Include="Asset\image\profile\user-1.jpg" />
+    <Content Include="Asset\image\uploads\ads1.png" />
+    <Content Include="Asset\image\uploads\ads2.png" />
+    <Content Include="Asset\image\uploads\author.png" />
+    <Content Include="Asset\image\uploads\author2.png" />
+    <Content Include="Asset\image\uploads\author3.png" />
+    <Content Include="Asset\image\uploads\author4.png" />
+    <Content Include="Asset\image\uploads\ava1.jpg" />
+    <Content Include="Asset\image\uploads\ava2.jpg" />
+    <Content Include="Asset\image\uploads\ava3.jpg" />
+    <Content Include="Asset\image\uploads\ava4.jpg" />
+    <Content Include="Asset\image\uploads\avatar-trang-4.jpg" />
+    <Content Include="Asset\image\uploads\blog-detail.jpg" />
+    <Content Include="Asset\image\uploads\blog-detail2.jpg" />
+    <Content Include="Asset\image\uploads\blog-it1.jpg" />
+    <Content Include="Asset\image\uploads\blog-it2.jpg" />
+    <Content Include="Asset\image\uploads\blog26.jpg" />
+    <Content Include="Asset\image\uploads\blog27.jpg" />
+    <Content Include="Asset\image\uploads\blog29.jpg" />
+    <Content Include="Asset\image\uploads\bloglist-it1.jpg" />
+    <Content Include="Asset\image\uploads\bloglist-it2.jpg" />
+    <Content Include="Asset\image\uploads\bloglist-it3.jpg" />
+    <Content Include="Asset\image\uploads\bloglist-it4.jpg" />
+    <Content Include="Asset\image\uploads\bloglist-it5.jpg" />
+    <Content Include="Asset\image\uploads\bloglist-it6.jpg" />
+    <Content Include="Asset\image\uploads\blogv21.jpg" />
+    <Content Include="Asset\image\uploads\blogv22.jpg" />
+    <Content Include="Asset\image\uploads\blogv23.jpg" />
+    <Content Include="Asset\image\uploads\blogv24.jpg" />
+    <Content Include="Asset\image\uploads\blogv25.jpg" />
+    <Content Include="Asset\image\uploads\blogv29.jpg" />
+    <Content Include="Asset\image\uploads\cast1.jpg" />
+    <Content Include="Asset\image\uploads\cast2.jpg" />
+    <Content Include="Asset\image\uploads\cast3.jpg" />
+    <Content Include="Asset\image\uploads\cast4.jpg" />
+    <Content Include="Asset\image\uploads\cast5.jpg" />
+    <Content Include="Asset\image\uploads\cast6.jpg" />
+    <Content Include="Asset\image\uploads\cast7.jpg" />
+    <Content Include="Asset\image\uploads\cast9.jpg" />
+    <Content Include="Asset\image\uploads\ceb1.jpg" />
+    <Content Include="Asset\image\uploads\ceb2.jpg" />
+    <Content Include="Asset\image\uploads\ceb21.jpg" />
+    <Content Include="Asset\image\uploads\ceb22.jpg" />
+    <Content Include="Asset\image\uploads\ceb23.jpg" />
+    <Content Include="Asset\image\uploads\ceb24.jpg" />
+    <Content Include="Asset\image\uploads\ceb25.jpg" />
+    <Content Include="Asset\image\uploads\ceb26.jpg" />
+    <Content Include="Asset\image\uploads\ceb27.jpg" />
+    <Content Include="Asset\image\uploads\ceb28.jpg" />
+    <Content Include="Asset\image\uploads\ceb29.jpg" />
+    <Content Include="Asset\image\uploads\ceb3.jpg" />
+    <Content Include="Asset\image\uploads\ceb4.jpg" />
+    <Content Include="Asset\image\uploads\ceb5.jpg" />
+    <Content Include="Asset\image\uploads\ceb6.jpg" />
+    <Content Include="Asset\image\uploads\ceb7.jpg" />
+    <Content Include="Asset\image\uploads\ceb8.jpg" />
+    <Content Include="Asset\image\uploads\ceb9.jpg" />
+    <Content Include="Asset\image\uploads\ceblist1.jpg" />
+    <Content Include="Asset\image\uploads\ceblist2.jpg" />
+    <Content Include="Asset\image\uploads\ceblist3.jpg" />
+    <Content Include="Asset\image\uploads\ceblist4.jpg" />
+    <Content Include="Asset\image\uploads\ceblist5.jpg" />
+    <Content Include="Asset\image\uploads\ceblist6.jpg" />
+    <Content Include="Asset\image\uploads\ceblist7.jpg" />
+    <Content Include="Asset\image\uploads\ceblist8.jpg" />
+    <Content Include="Asset\image\uploads\cebsingle2.png" />
+    <Content Include="Asset\image\uploads\celeb-hero-single.jpg" />
+    <Content Include="Asset\image\uploads\cm-img.png" />
+    <Content Include="Asset\image\uploads\drop-icon.png" />
+    <Content Include="Asset\image\uploads\err-img.png" />
+    <Content Include="Asset\image\uploads\error-bg.jpg" />
+    <Content Include="Asset\image\uploads\film1.jpg" />
+    <Content Include="Asset\image\uploads\film2.jpg" />
+    <Content Include="Asset\image\uploads\film3.jpg" />
+    <Content Include="Asset\image\uploads\film4.jpg" />
+    <Content Include="Asset\image\uploads\film5.jpg" />
+    <Content Include="Asset\image\uploads\film6.jpg" />
+    <Content Include="Asset\image\uploads\film7.jpg" />
+    <Content Include="Asset\image\uploads\film8.jpg" />
+    <Content Include="Asset\image\uploads\ft-bg.jpg" />
+    <Content Include="Asset\image\uploads\he-thong-am-thanh-hinh-anh-trong-rap-chieu-phim18e2abadc5b94db68a9c52429771f9d0.png" />
+    <Content Include="Asset\image\uploads\hero-bg.jpg" />
+    <Content Include="Asset\image\uploads\image1-1.jpg" />
+    <Content Include="Asset\image\uploads\image1.jpg" />
+    <Content Include="Asset\image\uploads\image10.jpg" />
+    <Content Include="Asset\image\uploads\image101.jpg" />
+    <Content Include="Asset\image\uploads\image11.jpg" />
+    <Content Include="Asset\image\uploads\image111.jpg" />
+    <Content Include="Asset\image\uploads\image12.jpg" />
+    <Content Include="Asset\image\uploads\image121.jpg" />
+    <Content Include="Asset\image\uploads\image13.jpg" />
+    <Content Include="Asset\image\uploads\image131.jpg" />
+    <Content Include="Asset\image\uploads\image14.jpg" />
+    <Content Include="Asset\image\uploads\image141.jpg" />
+    <Content Include="Asset\image\uploads\image15.jpg" />
+    <Content Include="Asset\image\uploads\image151.jpg" />
+    <Content Include="Asset\image\uploads\image16.jpg" />
+    <Content Include="Asset\image\uploads\image161.jpg" />
+    <Content Include="Asset\image\uploads\image17.jpg" />
+    <Content Include="Asset\image\uploads\image171.jpg" />
+    <Content Include="Asset\image\uploads\image18.jpg" />
+    <Content Include="Asset\image\uploads\image181.jpg" />
+    <Content Include="Asset\image\uploads\image19.jpg" />
+    <Content Include="Asset\image\uploads\image191.jpg" />
+    <Content Include="Asset\image\uploads\image2-1.jpg" />
+    <Content Include="Asset\image\uploads\image2.jpg" />
+    <Content Include="Asset\image\uploads\image20.jpg" />
+    <Content Include="Asset\image\uploads\image201.jpg" />
+    <Content Include="Asset\image\uploads\image21.jpg" />
+    <Content Include="Asset\image\uploads\image211.jpg" />
+    <Content Include="Asset\image\uploads\image3.jpg" />
+    <Content Include="Asset\image\uploads\image31.jpg" />
+    <Content Include="Asset\image\uploads\image4.jpg" />
+    <Content Include="Asset\image\uploads\image41.jpg" />
+    <Content Include="Asset\image\uploads\image5.jpg" />
+    <Content Include="Asset\image\uploads\image51.jpg" />
+    <Content Include="Asset\image\uploads\image6.jpg" />
+    <Content Include="Asset\image\uploads\image61.jpg" />
+    <Content Include="Asset\image\uploads\image7.jpg" />
+    <Content Include="Asset\image\uploads\image71.jpg" />
+    <Content Include="Asset\image\uploads\image8.jpg" />
+    <Content Include="Asset\image\uploads\image81.jpg" />
+    <Content Include="Asset\image\uploads\image9.jpg" />
+    <Content Include="Asset\image\uploads\image91.jpg" />
+    <Content Include="Asset\image\uploads\landing-dark-version.png" />
+    <Content Include="Asset\image\uploads\landing-light-version.png" />
+    <Content Include="Asset\image\uploads\logows.png" />
+    <Content Include="Asset\image\uploads\movie-single.jpg" />
+    <Content Include="Asset\image\uploads\mv-it1.jpg" />
+    <Content Include="Asset\image\uploads\mv-it10.jpg" />
+    <Content Include="Asset\image\uploads\mv-it11.jpg" />
+    <Content Include="Asset\image\uploads\mv-it12.jpg" />
+    <Content Include="Asset\image\uploads\mv-it2.jpg" />
+    <Content Include="Asset\image\uploads\mv-it3.jpg" />
+    <Content Include="Asset\image\uploads\mv-it4.jpg" />
+    <Content Include="Asset\image\uploads\mv-it5.jpg" />
+    <Content Include="Asset\image\uploads\mv-it6.jpg" />
+    <Content Include="Asset\image\uploads\mv-it7.jpg" />
+    <Content Include="Asset\image\uploads\mv-it8.jpg" />
+    <Content Include="Asset\image\uploads\mv-it9.jpg" />
+    <Content Include="Asset\image\uploads\mv-item1.jpg" />
+    <Content Include="Asset\image\uploads\mv-item10.jpg" />
+    <Content Include="Asset\image\uploads\mv-item11.jpg" />
+    <Content Include="Asset\image\uploads\mv-item12.jpg" />
+    <Content Include="Asset\image\uploads\mv-item2.jpg" />
+    <Content Include="Asset\image\uploads\mv-item3.jpg" />
+    <Content Include="Asset\image\uploads\mv-item4.jpg" />
+    <Content Include="Asset\image\uploads\mv-item5.jpg" />
+    <Content Include="Asset\image\uploads\mv-item6.jpg" />
+    <Content Include="Asset\image\uploads\mv-item7.jpg" />
+    <Content Include="Asset\image\uploads\mv-item8.jpg" />
+    <Content Include="Asset\image\uploads\mv-item9.jpg" />
+    <Content Include="Asset\image\uploads\mv1.jpg" />
+    <Content Include="Asset\image\uploads\mv2.jpg" />
+    <Content Include="Asset\image\uploads\mv3.jpg" />
+    <Content Include="Asset\image\uploads\mv4.jpg" />
+    <Content Include="Asset\image\uploads\mv5.jpg" />
+    <Content Include="Asset\image\uploads\pexels-donaldtong94-109669 %281%29.jpg" />
+    <Content Include="Asset\image\uploads\pexels-donaldtong94-109669.jpg" />
+    <Content Include="Asset\image\uploads\play-vd.png" />
+    <Content Include="Asset\image\uploads\poster1.jpg" />
+    <Content Include="Asset\image\uploads\Screenshot 2024-04-26 140740.png" />
+    <Content Include="Asset\image\uploads\search-bg.png" />
+    <Content Include="Asset\image\uploads\search-bgsb.png" />
+    <Content Include="Asset\image\uploads\season.jpg" />
+    <Content Include="Asset\image\uploads\series-img.jpg" />
+    <Content Include="Asset\image\uploads\slider-bg.jpg" />
+    <Content Include="Asset\image\uploads\slider-bg2.jpg" />
+    <Content Include="Asset\image\uploads\slider1.jpg" />
+    <Content Include="Asset\image\uploads\slider2.jpg" />
+    <Content Include="Asset\image\uploads\slider3.jpg" />
+    <Content Include="Asset\image\uploads\slider4.jpg" />
+    <Content Include="Asset\image\uploads\sr-single.jpg" />
+    <Content Include="Asset\image\uploads\topsearch.png" />
+    <Content Include="Asset\image\uploads\trailer2.jpg" />
+    <Content Include="Asset\image\uploads\trailer3.png" />
+    <Content Include="Asset\image\uploads\trailer4.png" />
+    <Content Include="Asset\image\uploads\trailer5.jpg" />
+    <Content Include="Asset\image\uploads\trailer6.jpg" />
+    <Content Include="Asset\image\uploads\trailer7.jpg" />
+    <Content Include="Asset\image\uploads\user-hero-bg.jpg" />
+    <Content Include="Asset\image\uploads\user-img.png" />
+    <Content Include="Asset\image\uploads\userava1.jpg" />
+    <Content Include="Asset\image\uploads\userava2.jpg" />
+    <Content Include="Asset\image\uploads\userava3.jpg" />
+    <Content Include="Asset\image\uploads\userava4.jpg" />
+    <Content Include="Asset\image\uploads\userava5.jpg" />
+    <Content Include="Asset\image\uploads\vd-item1.jpg" />
+    <Content Include="Asset\image\uploads\vd-item2.jpg" />
+    <Content Include="Asset\image\uploads\vd-item3.jpg" />
+    <Content Include="Asset\image\uploads\vd-item4.jpg" />
+    <Content Include="Asset\image\uploads\wallpaperflare.com_wallpaper %2847%29.jpg" />
+    <Content Include="Asset\image\uploads\wallpaperflare.com_wallpaper %2848%29.jpg" />
+    <Content Include="Asset\image\uploads\z5357270324124_51888d4c57a51e7ce0903fff741fe2ed.jpg" />
+    <Content Include="Asset\image\uploads\z5357270352349_51f69395050e5b4907eecf22119f0097.jpg" />
+    <Content Include="Asset\image\uploads\z5357270364632_df696a1492f71e9ca9731769396f8c6a.jpg" />
+    <Content Include="Asset\image\uploads\z5384775704191_afe8e24495759a9d068061b836663c47.jpg" />
+    <Content Include="Asset\Javascript\CommonPrivateSite.js" />
+    <Content Include="Asset\Javascript\CommonPublicSite.js" />
+    <Content Include="Asset\Javascript\custom.js" />
+    <Content Include="Asset\Javascript\dashboard.js" />
+    <Content Include="Asset\Javascript\menu.js" />
+    <Content Include="Asset\Javascript\plugins.js" />
+    <Content Include="Asset\Javascript\plugins2.js" />
+    <Content Include="Asset\Javascript\scriptLogin.js" />
+    <Content Include="Asset\Javascript\sidebar_dashboard.js" />
+    <Content Include="Asset\Lib\apexchart\dist\apexcharts.amd.js" />
+    <Content Include="Asset\Lib\apexchart\dist\apexcharts.amd.js.LICENSE.txt" />
+    <Content Include="Asset\Lib\apexchart\dist\apexcharts.common.js" />
+    <Content Include="Asset\Lib\apexchart\dist\apexcharts.css" />
+    <Content Include="Asset\Lib\apexchart\dist\apexcharts.esm.js" />
+    <Content Include="Asset\Lib\apexchart\dist\apexcharts.js" />
+    <Content Include="Asset\Lib\apexchart\dist\apexcharts.min.js" />
+    <Content Include="Asset\Lib\apexchart\samples\assets\github-data.js" />
+    <Content Include="Asset\Lib\apexchart\samples\assets\images\1101098.png" />
+    <Content Include="Asset\Lib\apexchart\samples\assets\images\2979121308_59539a3898_z.jpg" />
+    <Content Include="Asset\Lib\apexchart\samples\assets\images\4274635880_809a4b9d0d_z.jpg" />
+    <Content Include="Asset\Lib\apexchart\samples\assets\images\4679113782_ca13e2e6c0_z.jpg" />
+    <Content Include="Asset\Lib\apexchart\samples\assets\images\abstract.jpg" />
+    <Content Include="Asset\Lib\apexchart\samples\assets\images\clock.png" />
+    <Content Include="Asset\Lib\apexchart\samples\assets\images\ico-instagram.png" />
+    <Content Include="Asset\Lib\apexchart\samples\assets\images\ico-messenger.png" />
+    <Content Include="Asset\Lib\apexchart\samples\assets\images\stripes.jpg" />
+    <Content Include="Asset\Lib\apexchart\samples\assets\irregular-data-series.js" />
+    <Content Include="Asset\Lib\apexchart\samples\assets\ohlc.js" />
+    <Content Include="Asset\Lib\apexchart\samples\assets\stock-prices.js" />
+    <Content Include="Asset\Lib\apexchart\samples\assets\styles.css" />
+    <Content Include="Asset\Lib\apexchart\samples\react\area\area-datetime.html" />
+    <Content Include="Asset\Lib\apexchart\samples\react\area\area-github-style.html" />
+    <Content Include="Asset\Lib\apexchart\samples\react\area\area-spline.html" />
+    <Content Include="Asset\Lib\apexchart\samples\react\area\area-with-missing-data.html" />
+    <Content Include="Asset\Lib\apexchart\samples\react\area\area-with-negative.html" />
+    <Content Include="Asset\Lib\apexchart\samples\react\area\basic-area.html" />
+    <Content Include="Asset\Lib\apexchart\samples\react\area\stacked-area.html" />
+    <Content Include="Asset\Lib\apexchart\samples\react\area\timeseries-with-irregular-data.html" />
+    <Content Include="Asset\Lib\apexchart\samples\react\bar\bar-with-custom-data-labels.html" />
+    <Content Include="Asset\Lib\apexchart\samples\react\bar\bar-with-images.html" />
+    <Content Include="Asset\Lib\apexchart\samples\react\bar\bar-with-markers.html" />
+    <Content Include="Asset\Lib\apexchart\samples\react\bar\bar-with-negative.html" />
+    <Content Include="Asset\Lib\apexchart\samples\react\bar\basic-bar.html" />
+    <Content Include="Asset\Lib\apexchart\samples\react\bar\grouped-bar.html" />
+    <Content Include="Asset\Lib\apexchart\samples\react\bar\grouped-stacked-bar.html" />
+    <Content Include="Asset\Lib\apexchart\samples\react\bar\patterned-bar.html" />
+    <Content Include="Asset\Lib\apexchart\samples\react\bar\reversed-bar.html" />
+    <Content Include="Asset\Lib\apexchart\samples\react\bar\stacked-bar-100.html" />
+    <Content Include="Asset\Lib\apexchart\samples\react\bar\stacked-bar.html" />
+    <Content Include="Asset\Lib\apexchart\samples\react\boxPlot\basic.html" />
+    <Content Include="Asset\Lib\apexchart\samples\react\boxPlot\boxplot-scatter.html" />
+    <Content Include="Asset\Lib\apexchart\samples\react\boxPlot\horizontal-boxplot.html" />
+    <Content Include="Asset\Lib\apexchart\samples\react\bubble\3d-bubble.html" />
+    <Content Include="Asset\Lib\apexchart\samples\react\bubble\simple-bubble.html" />
+    <Content Include="Asset\Lib\apexchart\samples\react\candlestick\basic.html" />
+    <Content Include="Asset\Lib\apexchart\samples\react\candlestick\candlestick-bar.html" />
+    <Content Include="Asset\Lib\apexchart\samples\react\candlestick\candlestick-category.html" />
+    <Content Include="Asset\Lib\apexchart\samples\react\candlestick\candlestick-line.html" />
+    <Content Include="Asset\Lib\apexchart\samples\react\column\basic-column.html" />
+    <Content Include="Asset\Lib\apexchart\samples\react\column\column-with-data-labels.html" />
+    <Content Include="Asset\Lib\apexchart\samples\react\column\column-with-group-label.html" />
+    <Content Include="Asset\Lib\apexchart\samples\react\column\column-with-markers.html" />
+    <Content Include="Asset\Lib\apexchart\samples\react\column\column-with-negative.html" />
+    <Content Include="Asset\Lib\apexchart\samples\react\column\column-with-rotated-data-labels.html" />
+    <Content Include="Asset\Lib\apexchart\samples\react\column\column-with-rotated-labels.html" />
+    <Content Include="Asset\Lib\apexchart\samples\react\column\data-color.html" />
+    <Content Include="Asset\Lib\apexchart\samples\react\column\distributed-columns.html" />
+    <Content Include="Asset\Lib\apexchart\samples\react\column\dumbbell-chart.html" />
+    <Content Include="Asset\Lib\apexchart\samples\react\column\dynamic-loaded-chart.html" />
+    <Content Include="Asset\Lib\apexchart\samples\react\column\grouped-stacked-column.html" />
+    <Content Include="Asset\Lib\apexchart\samples\react\column\range-column.html" />
+    <Content Include="Asset\Lib\apexchart\samples\react\column\stacked-column-100.html" />
+    <Content Include="Asset\Lib\apexchart\samples\react\column\stacked-column-with-line.html" />
+    <Content Include="Asset\Lib\apexchart\samples\react\column\stacked-column.html" />
+    <Content Include="Asset\Lib\apexchart\samples\react\funnel\funnel.html" />
+    <Content Include="Asset\Lib\apexchart\samples\react\funnel\pyramid.html" />
+    <Content Include="Asset\Lib\apexchart\samples\react\heatmap\basic.html" />
+    <Content Include="Asset\Lib\apexchart\samples\react\heatmap\color-range.html" />
+    <Content Include="Asset\Lib\apexchart\samples\react\heatmap\image-fill.html" />
+    <Content Include="Asset\Lib\apexchart\samples\react\heatmap\multiple-color-scales-flipped.html" />
+    <Content Include="Asset\Lib\apexchart\samples\react\heatmap\multiple-color.html" />
+    <Content Include="Asset\Lib\apexchart\samples\react\heatmap\rounded.html" />
+    <Content Include="Asset\Lib\apexchart\samples\react\line\basic-line.html" />
+    <Content Include="Asset\Lib\apexchart\samples\react\line\brush-charts.html" />
+    <Content Include="Asset\Lib\apexchart\samples\react\line\dashed-line.html" />
+    <Content Include="Asset\Lib\apexchart\samples\react\line\gradient-line.html" />
+    <Content Include="Asset\Lib\apexchart\samples\react\line\line-with-annotations.html" />
+    <Content Include="Asset\Lib\apexchart\samples\react\line\line-with-data-labels.html" />
+    <Content Include="Asset\Lib\apexchart\samples\react\line\line-with-image.html" />
+    <Content Include="Asset\Lib\apexchart\samples\react\line\line-with-missing-data.html" />
+    <Content Include="Asset\Lib\apexchart\samples\react\line\logarithmic-line.html" />
+    <Content Include="Asset\Lib\apexchart\samples\react\line\realtime.html" />
+    <Content Include="Asset\Lib\apexchart\samples\react\line\stepline.html" />
+    <Content Include="Asset\Lib\apexchart\samples\react\line\syncing-charts.html" />
+    <Content Include="Asset\Lib\apexchart\samples\react\line\zoomable-timeseries.html" />
+    <Content Include="Asset\Lib\apexchart\samples\react\misc\annotations-example.html" />
+    <Content Include="Asset\Lib\apexchart\samples\react\misc\minMaxPoints.html" />
+    <Content Include="Asset\Lib\apexchart\samples\react\misc\range-annotations-inverted-axis-example.html" />
+    <Content Include="Asset\Lib\apexchart\samples\react\mixed\line-area.html" />
+    <Content Include="Asset\Lib\apexchart\samples\react\mixed\line-column-area.html" />
+    <Content Include="Asset\Lib\apexchart\samples\react\mixed\line-column.html" />
+    <Content Include="Asset\Lib\apexchart\samples\react\mixed\line-scatter.html" />
+    <Content Include="Asset\Lib\apexchart\samples\react\mixed\multiple-yaxes.html" />
+    <Content Include="Asset\Lib\apexchart\samples\react\pie\donut-update.html" />
+    <Content Include="Asset\Lib\apexchart\samples\react\pie\donut-with-pattern.html" />
+    <Content Include="Asset\Lib\apexchart\samples\react\pie\gradient-donut.html" />
+    <Content Include="Asset\Lib\apexchart\samples\react\pie\monochrome-pie.html" />
+    <Content Include="Asset\Lib\apexchart\samples\react\pie\pie-with-image.html" />
+    <Content Include="Asset\Lib\apexchart\samples\react\pie\semi-donut.html" />
+    <Content Include="Asset\Lib\apexchart\samples\react\pie\simple-donut.html" />
+    <Content Include="Asset\Lib\apexchart\samples\react\pie\simple-pie.html" />
+    <Content Include="Asset\Lib\apexchart\samples\react\polarArea\basic-polar-area.html" />
+    <Content Include="Asset\Lib\apexchart\samples\react\polarArea\polar-area-monochrome.html" />
+    <Content Include="Asset\Lib\apexchart\samples\react\radar\basic-radar.html" />
+    <Content Include="Asset\Lib\apexchart\samples\react\radar\radar-multiple-series.html" />
+    <Content Include="Asset\Lib\apexchart\samples\react\radar\radar-with-polygon-fill.html" />
+    <Content Include="Asset\Lib\apexchart\samples\react\radialBar\circle-chart-multiple.html" />
+    <Content Include="Asset\Lib\apexchart\samples\react\radialBar\circle-chart-with-image.html" />
+    <Content Include="Asset\Lib\apexchart\samples\react\radialBar\circle-chart.html" />
+    <Content Include="Asset\Lib\apexchart\samples\react\radialBar\circle-custom-angle.html" />
+    <Content Include="Asset\Lib\apexchart\samples\react\radialBar\circle-gradient.html" />
+    <Content Include="Asset\Lib\apexchart\samples\react\radialBar\semi-circle-chart.html" />
+    <Content Include="Asset\Lib\apexchart\samples\react\radialBar\stroked-gauge.html" />
+    <Content Include="Asset\Lib\apexchart\samples\react\rangeArea\basic-range-area.html" />
+    <Content Include="Asset\Lib\apexchart\samples\react\rangeArea\range-area-line-combo.html" />
+    <Content Include="Asset\Lib\apexchart\samples\react\scatter\scatter-basic.html" />
+    <Content Include="Asset\Lib\apexchart\samples\react\scatter\scatter-datetime.html" />
+    <Content Include="Asset\Lib\apexchart\samples\react\scatter\scatter-images.html" />
+    <Content Include="Asset\Lib\apexchart\samples\react\sparklines\sparklines.html" />
+    <Content Include="Asset\Lib\apexchart\samples\react\timelines\advanced.html" />
+    <Content Include="Asset\Lib\apexchart\samples\react\timelines\controlling-colors.html" />
+    <Content Include="Asset\Lib\apexchart\samples\react\timelines\dumbbell-chart-horizontal.html" />
+    <Content Include="Asset\Lib\apexchart\samples\react\timelines\multi-series-group-rows.html" />
+    <Content Include="Asset\Lib\apexchart\samples\react\timelines\multi-series.html" />
+    <Content Include="Asset\Lib\apexchart\samples\react\timelines\simple.html" />
+    <Content Include="Asset\Lib\apexchart\samples\react\treemap\basic.html" />
+    <Content Include="Asset\Lib\apexchart\samples\react\treemap\color-scale.html" />
+    <Content Include="Asset\Lib\apexchart\samples\react\treemap\distributed.html" />
+    <Content Include="Asset\Lib\apexchart\samples\react\treemap\multi-dimensional.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vanilla-js\area\area-datetime.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vanilla-js\area\area-github-style.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vanilla-js\area\area-spline.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vanilla-js\area\area-with-missing-data.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vanilla-js\area\area-with-negative.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vanilla-js\area\basic-area.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vanilla-js\area\stacked-area.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vanilla-js\area\timeseries-with-irregular-data.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vanilla-js\bar\bar-with-custom-data-labels.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vanilla-js\bar\bar-with-images.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vanilla-js\bar\bar-with-markers.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vanilla-js\bar\bar-with-negative.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vanilla-js\bar\basic-bar.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vanilla-js\bar\grouped-bar.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vanilla-js\bar\grouped-stacked-bar.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vanilla-js\bar\patterned-bar.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vanilla-js\bar\reversed-bar.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vanilla-js\bar\stacked-bar-100.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vanilla-js\bar\stacked-bar.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vanilla-js\boxPlot\basic.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vanilla-js\boxPlot\boxplot-scatter.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vanilla-js\boxPlot\horizontal-boxplot.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vanilla-js\bubble\3d-bubble.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vanilla-js\bubble\simple-bubble.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vanilla-js\candlestick\basic.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vanilla-js\candlestick\candlestick-bar.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vanilla-js\candlestick\candlestick-category.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vanilla-js\candlestick\candlestick-line.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vanilla-js\column\basic-column.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vanilla-js\column\column-with-data-labels.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vanilla-js\column\column-with-group-label.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vanilla-js\column\column-with-markers.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vanilla-js\column\column-with-negative.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vanilla-js\column\column-with-rotated-data-labels.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vanilla-js\column\column-with-rotated-labels.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vanilla-js\column\data-color.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vanilla-js\column\distributed-columns.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vanilla-js\column\dumbbell-chart.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vanilla-js\column\dynamic-loaded-chart.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vanilla-js\column\grouped-stacked-column.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vanilla-js\column\histogram.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vanilla-js\column\range-column.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vanilla-js\column\stacked-column-100.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vanilla-js\column\stacked-column-with-line.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vanilla-js\column\stacked-column.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vanilla-js\dashboards\dark\assets\scripts.js" />
+    <Content Include="Asset\Lib\apexchart\samples\vanilla-js\dashboards\dark\assets\styles.css" />
+    <Content Include="Asset\Lib\apexchart\samples\vanilla-js\dashboards\dark\index.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vanilla-js\dashboards\material\assets\scripts.js" />
+    <Content Include="Asset\Lib\apexchart\samples\vanilla-js\dashboards\material\assets\styles.css" />
+    <Content Include="Asset\Lib\apexchart\samples\vanilla-js\dashboards\material\index.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vanilla-js\dashboards\modern\assets\data.js" />
+    <Content Include="Asset\Lib\apexchart\samples\vanilla-js\dashboards\modern\assets\img\banana.png" />
+    <Content Include="Asset\Lib\apexchart\samples\vanilla-js\dashboards\modern\assets\img\logo.png" />
+    <Content Include="Asset\Lib\apexchart\samples\vanilla-js\dashboards\modern\assets\img\map.png" />
+    <Content Include="Asset\Lib\apexchart\samples\vanilla-js\dashboards\modern\assets\img\tellius.png" />
+    <Content Include="Asset\Lib\apexchart\samples\vanilla-js\dashboards\modern\assets\img\user.png" />
+    <Content Include="Asset\Lib\apexchart\samples\vanilla-js\dashboards\modern\assets\scripts.js" />
+    <Content Include="Asset\Lib\apexchart\samples\vanilla-js\dashboards\modern\assets\styles.css" />
+    <Content Include="Asset\Lib\apexchart\samples\vanilla-js\dashboards\modern\index.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vanilla-js\dashboards\realtime\assets\edit-on-codepen.png" />
+    <Content Include="Asset\Lib\apexchart\samples\vanilla-js\dashboards\realtime\assets\scripts.js" />
+    <Content Include="Asset\Lib\apexchart\samples\vanilla-js\dashboards\realtime\assets\styles.css" />
+    <Content Include="Asset\Lib\apexchart\samples\vanilla-js\dashboards\realtime\index.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vanilla-js\funnel\funnel.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vanilla-js\funnel\pyramid.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vanilla-js\heatmap\basic.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vanilla-js\heatmap\color-range.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vanilla-js\heatmap\image-fill.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vanilla-js\heatmap\multiple-color-scales-flipped.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vanilla-js\heatmap\multiple-color.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vanilla-js\heatmap\rounded.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vanilla-js\line\basic-line.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vanilla-js\line\brush-charts.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vanilla-js\line\dashed-line.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vanilla-js\line\gradient-line.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vanilla-js\line\line-with-annotations.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vanilla-js\line\line-with-data-labels.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vanilla-js\line\line-with-image.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vanilla-js\line\line-with-missing-data.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vanilla-js\line\logarithmic-line.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vanilla-js\line\realtime.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vanilla-js\line\stepline.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vanilla-js\line\syncing-charts.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vanilla-js\line\zoomable-timeseries.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vanilla-js\misc\annotations-example.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vanilla-js\misc\axios.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vanilla-js\misc\custom-legend.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vanilla-js\misc\init-from-attrs.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vanilla-js\misc\jquery.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vanilla-js\misc\minMaxPoints.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vanilla-js\misc\range-annotations-inverted-axis-example.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vanilla-js\mixed\line-area.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vanilla-js\mixed\line-column-area.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vanilla-js\mixed\line-column.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vanilla-js\mixed\line-scatter.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vanilla-js\mixed\multiple-yaxes.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vanilla-js\pie\donut-update.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vanilla-js\pie\donut-with-pattern.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vanilla-js\pie\gradient-donut.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vanilla-js\pie\monochrome-pie.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vanilla-js\pie\pie-with-image.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vanilla-js\pie\semi-donut.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vanilla-js\pie\simple-donut.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vanilla-js\pie\simple-pie.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vanilla-js\polarArea\basic-polar-area.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vanilla-js\polarArea\polar-area-monochrome.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vanilla-js\radar\basic-radar.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vanilla-js\radar\radar-multiple-series.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vanilla-js\radar\radar-with-polygon-fill.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vanilla-js\radialBar\circle-chart-multiple.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vanilla-js\radialBar\circle-chart-with-image.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vanilla-js\radialBar\circle-chart.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vanilla-js\radialBar\circle-custom-angle.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vanilla-js\radialBar\circle-gradient.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vanilla-js\radialBar\semi-circle-chart.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vanilla-js\radialBar\stroked-gauge.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vanilla-js\rangeArea\basic-range-area.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vanilla-js\rangeArea\range-area-line-combo.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vanilla-js\scatter\scatter-basic.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vanilla-js\scatter\scatter-datetime.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vanilla-js\scatter\scatter-images.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vanilla-js\sparklines\sparklines.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vanilla-js\timelines\advanced.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vanilla-js\timelines\controlling-colors.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vanilla-js\timelines\dumbbell-chart-horizontal.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vanilla-js\timelines\multi-series-group-rows.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vanilla-js\timelines\multi-series.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vanilla-js\timelines\simple.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vanilla-js\treemap\basic.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vanilla-js\treemap\color-scale.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vanilla-js\treemap\distributed.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vanilla-js\treemap\multi-dimensional.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vue\area\area-datetime.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vue\area\area-github-style.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vue\area\area-spline.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vue\area\area-with-missing-data.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vue\area\area-with-negative.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vue\area\basic-area.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vue\area\stacked-area.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vue\area\timeseries-with-irregular-data.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vue\bar\bar-with-custom-data-labels.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vue\bar\bar-with-images.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vue\bar\bar-with-markers.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vue\bar\bar-with-negative.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vue\bar\basic-bar.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vue\bar\grouped-bar.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vue\bar\grouped-stacked-bar.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vue\bar\patterned-bar.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vue\bar\reversed-bar.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vue\bar\stacked-bar-100.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vue\bar\stacked-bar.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vue\boxPlot\basic.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vue\boxPlot\boxplot-scatter.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vue\boxPlot\horizontal-boxplot.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vue\bubble\3d-bubble.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vue\bubble\simple-bubble.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vue\candlestick\basic.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vue\candlestick\candlestick-bar.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vue\candlestick\candlestick-category.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vue\candlestick\candlestick-line.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vue\column\basic-column.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vue\column\column-with-data-labels.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vue\column\column-with-group-label.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vue\column\column-with-markers.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vue\column\column-with-negative.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vue\column\column-with-rotated-data-labels.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vue\column\column-with-rotated-labels.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vue\column\data-color.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vue\column\distributed-columns.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vue\column\dumbbell-chart.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vue\column\dynamic-loaded-chart.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vue\column\grouped-stacked-column.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vue\column\range-column.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vue\column\stacked-column-100.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vue\column\stacked-column-with-line.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vue\column\stacked-column.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vue\funnel\funnel.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vue\funnel\pyramid.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vue\heatmap\basic.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vue\heatmap\color-range.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vue\heatmap\image-fill.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vue\heatmap\multiple-color-scales-flipped.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vue\heatmap\multiple-color.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vue\heatmap\rounded.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vue\line\basic-line.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vue\line\brush-charts.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vue\line\dashed-line.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vue\line\gradient-line.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vue\line\line-with-annotations.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vue\line\line-with-data-labels.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vue\line\line-with-image.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vue\line\line-with-missing-data.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vue\line\logarithmic-line.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vue\line\realtime.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vue\line\stepline.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vue\line\syncing-charts.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vue\line\zoomable-timeseries.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vue\misc\annotations-example.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vue\misc\minMaxPoints.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vue\misc\range-annotations-inverted-axis-example.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vue\mixed\line-area.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vue\mixed\line-column-area.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vue\mixed\line-column.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vue\mixed\line-scatter.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vue\mixed\multiple-yaxes.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vue\pie\donut-update.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vue\pie\donut-with-pattern.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vue\pie\gradient-donut.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vue\pie\monochrome-pie.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vue\pie\pie-with-image.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vue\pie\semi-donut.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vue\pie\simple-donut.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vue\pie\simple-pie.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vue\polarArea\basic-polar-area.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vue\polarArea\polar-area-monochrome.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vue\radar\basic-radar.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vue\radar\radar-multiple-series.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vue\radar\radar-with-polygon-fill.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vue\radialBar\circle-chart-multiple.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vue\radialBar\circle-chart-with-image.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vue\radialBar\circle-chart.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vue\radialBar\circle-custom-angle.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vue\radialBar\circle-gradient.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vue\radialBar\semi-circle-chart.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vue\radialBar\stroked-gauge.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vue\rangeArea\basic-range-area.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vue\rangeArea\range-area-line-combo.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vue\scatter\scatter-basic.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vue\scatter\scatter-datetime.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vue\scatter\scatter-images.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vue\sparklines\sparklines.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vue\timelines\advanced.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vue\timelines\controlling-colors.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vue\timelines\dumbbell-chart-horizontal.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vue\timelines\multi-series-group-rows.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vue\timelines\multi-series.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vue\timelines\simple.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vue\treemap\basic.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vue\treemap\color-scale.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vue\treemap\distributed.html" />
+    <Content Include="Asset\Lib\apexchart\samples\vue\treemap\multi-dimensional.html" />
+    <Content Include="Asset\Lib\Bootstrap\css\bootstrap-grid.css" />
+    <Content Include="Asset\Lib\Bootstrap\css\bootstrap-grid.min.css" />
+    <Content Include="Asset\Lib\Bootstrap\css\bootstrap-grid.rtl.css" />
+    <Content Include="Asset\Lib\Bootstrap\css\bootstrap-grid.rtl.min.css" />
+    <Content Include="Asset\Lib\Bootstrap\css\bootstrap-reboot.css" />
+    <Content Include="Asset\Lib\Bootstrap\css\bootstrap-reboot.min.css" />
+    <Content Include="Asset\Lib\Bootstrap\css\bootstrap-reboot.rtl.css" />
+    <Content Include="Asset\Lib\Bootstrap\css\bootstrap-reboot.rtl.min.css" />
+    <Content Include="Asset\Lib\Bootstrap\css\bootstrap-utilities.css" />
+    <Content Include="Asset\Lib\Bootstrap\css\bootstrap-utilities.min.css" />
+    <Content Include="Asset\Lib\Bootstrap\css\bootstrap-utilities.rtl.css" />
+    <Content Include="Asset\Lib\Bootstrap\css\bootstrap-utilities.rtl.min.css" />
+    <Content Include="Asset\Lib\Bootstrap\css\bootstrap.css" />
+    <Content Include="Asset\Lib\Bootstrap\css\bootstrap.min.css" />
+    <Content Include="Asset\Lib\Bootstrap\css\bootstrap.rtl.css" />
+    <Content Include="Asset\Lib\Bootstrap\css\bootstrap.rtl.min.css" />
+    <Content Include="Asset\Lib\Bootstrap\js\bootstrap.bundle.js" />
+    <Content Include="Asset\Lib\Bootstrap\js\bootstrap.bundle.min.js" />
+    <Content Include="Asset\Lib\Bootstrap\js\bootstrap.esm.js" />
+    <Content Include="Asset\Lib\Bootstrap\js\bootstrap.esm.min.js" />
+    <Content Include="Asset\Lib\Bootstrap\js\bootstrap.js" />
+    <Content Include="Asset\Lib\Bootstrap\js\bootstrap.min.js" />
+    <Content Include="Asset\Lib\Jquery\Jquery3_7_1.min.js" />
+    <Content Include="Content\PagedList.css" />
+    <Content Include="Content\Site.css" />
+    <Content Include="Global.asax" />
+    <Content Include="Models\Model1.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Model1.edmx</DependentUpon>
+      <LastGenOutput>Model1.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\Model1.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Model1.edmx</DependentUpon>
+      <LastGenOutput>Model1.cs</LastGenOutput>
+    </Content>
+    <Content Include="Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Areas\PrivateSite\Controllers\AccountManagementController.cs" />
+    <Compile Include="Areas\PrivateSite\Controllers\AritcleController.cs" />
+    <Compile Include="Areas\PrivateSite\Controllers\BrandController.cs" />
+    <Compile Include="Areas\PrivateSite\Controllers\CommentController.cs" />
+    <Compile Include="Areas\PrivateSite\Controllers\DashboardController.cs" />
+    <Compile Include="Areas\PrivateSite\Controllers\ProductController.cs" />
+    <Compile Include="Areas\PrivateSite\PrivateSiteAreaRegistration.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AllItemController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ProductDetailsController.cs" />
+    <Compile Include="Controllers\ThanhToanController.cs" />
+    <Compile Include="Controllers\UserProfileController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\BaiViet.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\BinhLuan.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Cart.cs" />
+    <Compile Include="Models\ChiTietDonHang.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Common.cs" />
+    <Compile Include="Models\CustomAuthentication.cs" />
+    <Compile Include="Models\CustomAuthorize.cs" />
+    <Compile Include="Models\DMuc.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DonDatHang.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\HashPassword.cs" />
+    <Compile Include="Models\KhachHang.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MaKichHoatTaiKhoan.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Model1.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model1.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Model1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Model1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model1.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\NhomTaiKhoan.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PhuongThucThanhToan.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ProductVM.cs" />
+    <Compile Include="Models\SanPham.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SanPhamSize.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SizeGiay.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sysdiagram.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TaiKhoan.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ThHieu.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TrangThaiDon.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TrangThaiTaiKhoan.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PrivateSiteController.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModel\ArticleVM.cs" />
+    <Compile Include="ViewModel\RegisterVM.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\web.config" />
+    <Content Include="Areas\PrivateSite\Views\web.config" />
+    <Content Include="Areas\PrivateSite\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\PrivateSite\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\PrivateSite\Views\Product\Index.cshtml" />
+    <Content Include="Asset\assets\fonts\font-awesome\fontawesome-webfont3e6e.eot" />
+    <Content Include="Asset\assets\fonts\font-awesome\fontawesome-webfont3e6e.ttf" />
+    <Content Include="Asset\assets\fonts\font-awesome\fontawesome-webfont3e6e.woff" />
+    <Content Include="Asset\assets\fonts\font-awesome\fontawesome-webfont3e6e.woff2" />
+    <Content Include="Asset\assets\fonts\font-awesome\fontawesome-webfontd41d.eot" />
+    <Content Include="Asset\assets\fonts\ionicon-fonts\ionicons28b5.eot" />
+    <Content Include="Asset\assets\fonts\ionicon-fonts\ionicons28b5.ttf" />
+    <Content Include="Asset\assets\fonts\ionicon-fonts\ionicons28b5.woff" />
+    <Content Include="Asset\assets\fonts\simple-line-icon-fonts\Simple-Line-Iconsb26c.eot" />
+    <Content Include="Asset\assets\fonts\simple-line-icon-fonts\Simple-Line-Iconsb26c.ttf" />
+    <Content Include="Asset\assets\fonts\simple-line-icon-fonts\Simple-Line-Iconsb26c.woff" />
+    <Content Include="Asset\assets\fonts\simple-line-icon-fonts\Simple-Line-Iconsb26c.woff2" />
+    <Content Include="Asset\Css\icons\tabler-icons\fonts\tabler-icons.eot" />
+    <Content Include="Asset\Css\icons\tabler-icons\fonts\tabler-icons.ttf" />
+    <Content Include="Asset\Css\icons\tabler-icons\fonts\tabler-icons.woff" />
+    <Content Include="Asset\Css\icons\tabler-icons\fonts\tabler-icons.woff2" />
+    <Content Include="Asset\Lib\apexchart\apexcharts-bundle.zip" />
+    <Content Include="Asset\Lib\apexchart\dist\locales\ar.json" />
+    <Content Include="Asset\Lib\apexchart\dist\locales\ca.json" />
+    <Content Include="Asset\Lib\apexchart\dist\locales\cs.json" />
+    <Content Include="Asset\Lib\apexchart\dist\locales\da.json" />
+    <Content Include="Asset\Lib\apexchart\dist\locales\de.json" />
+    <Content Include="Asset\Lib\apexchart\dist\locales\el.json" />
+    <Content Include="Asset\Lib\apexchart\dist\locales\en.json" />
+    <Content Include="Asset\Lib\apexchart\dist\locales\es.json" />
+    <Content Include="Asset\Lib\apexchart\dist\locales\et.json" />
+    <Content Include="Asset\Lib\apexchart\dist\locales\fa.json" />
+    <Content Include="Asset\Lib\apexchart\dist\locales\fi.json" />
+    <Content Include="Asset\Lib\apexchart\dist\locales\fr.json" />
+    <Content Include="Asset\Lib\apexchart\dist\locales\he.json" />
+    <Content Include="Asset\Lib\apexchart\dist\locales\hi.json" />
+    <Content Include="Asset\Lib\apexchart\dist\locales\hr.json" />
+    <Content Include="Asset\Lib\apexchart\dist\locales\hu.json" />
+    <Content Include="Asset\Lib\apexchart\dist\locales\hy.json" />
+    <Content Include="Asset\Lib\apexchart\dist\locales\id.json" />
+    <Content Include="Asset\Lib\apexchart\dist\locales\it.json" />
+    <Content Include="Asset\Lib\apexchart\dist\locales\ja.json" />
+    <Content Include="Asset\Lib\apexchart\dist\locales\ka.json" />
+    <Content Include="Asset\Lib\apexchart\dist\locales\ko.json" />
+    <Content Include="Asset\Lib\apexchart\dist\locales\lt.json" />
+    <Content Include="Asset\Lib\apexchart\dist\locales\lv.json" />
+    <Content Include="Asset\Lib\apexchart\dist\locales\nb.json" />
+    <Content Include="Asset\Lib\apexchart\dist\locales\nl.json" />
+    <Content Include="Asset\Lib\apexchart\dist\locales\pl.json" />
+    <Content Include="Asset\Lib\apexchart\dist\locales\pt-br.json" />
+    <Content Include="Asset\Lib\apexchart\dist\locales\pt.json" />
+    <Content Include="Asset\Lib\apexchart\dist\locales\rs.json" />
+    <Content Include="Asset\Lib\apexchart\dist\locales\ru.json" />
+    <Content Include="Asset\Lib\apexchart\dist\locales\se.json" />
+    <Content Include="Asset\Lib\apexchart\dist\locales\sk.json" />
+    <Content Include="Asset\Lib\apexchart\dist\locales\sl.json" />
+    <Content Include="Asset\Lib\apexchart\dist\locales\sq.json" />
+    <Content Include="Asset\Lib\apexchart\dist\locales\th.json" />
+    <Content Include="Asset\Lib\apexchart\dist\locales\tr.json" />
+    <Content Include="Asset\Lib\apexchart\dist\locales\ua.json" />
+    <Content Include="Asset\Lib\apexchart\dist\locales\zh-cn.json" />
+    <Content Include="Asset\Lib\apexchart\dist\locales\zh-tw.json" />
+    <Content Include="Asset\Lib\Bootstrap\css\bootstrap-grid.css.map" />
+    <Content Include="Asset\Lib\Bootstrap\css\bootstrap-grid.min.css.map" />
+    <Content Include="Asset\Lib\Bootstrap\css\bootstrap-grid.rtl.css.map" />
+    <Content Include="Asset\Lib\Bootstrap\css\bootstrap-grid.rtl.min.css.map" />
+    <Content Include="Asset\Lib\Bootstrap\css\bootstrap-reboot.css.map" />
+    <Content Include="Asset\Lib\Bootstrap\css\bootstrap-reboot.min.css.map" />
+    <Content Include="Asset\Lib\Bootstrap\css\bootstrap-reboot.rtl.css.map" />
+    <Content Include="Asset\Lib\Bootstrap\css\bootstrap-reboot.rtl.min.css.map" />
+    <Content Include="Asset\Lib\Bootstrap\css\bootstrap-utilities.css.map" />
+    <Content Include="Asset\Lib\Bootstrap\css\bootstrap-utilities.min.css.map" />
+    <Content Include="Asset\Lib\Bootstrap\css\bootstrap-utilities.rtl.css.map" />
+    <Content Include="Asset\Lib\Bootstrap\css\bootstrap-utilities.rtl.min.css.map" />
+    <Content Include="Asset\Lib\Bootstrap\css\bootstrap.css.map" />
+    <Content Include="Asset\Lib\Bootstrap\css\bootstrap.min.css.map" />
+    <Content Include="Asset\Lib\Bootstrap\css\bootstrap.rtl.css.map" />
+    <Content Include="Asset\Lib\Bootstrap\css\bootstrap.rtl.min.css.map" />
+    <Content Include="Asset\Lib\Bootstrap\js\bootstrap.bundle.js.map" />
+    <Content Include="Asset\Lib\Bootstrap\js\bootstrap.bundle.min.js.map" />
+    <Content Include="Asset\Lib\Bootstrap\js\bootstrap.esm.js.map" />
+    <Content Include="Asset\Lib\Bootstrap\js\bootstrap.esm.min.js.map" />
+    <Content Include="Asset\Lib\Bootstrap\js\bootstrap.js.map" />
+    <Content Include="Asset\Lib\Bootstrap\js\bootstrap.min.js.map" />
+    <Content Include="Areas\PrivateSite\Views\AccountManagement\DetailAccount.cshtml" />
+    <Content Include="Areas\PrivateSite\Views\AccountManagement\ListOfAccount.cshtml" />
+    <Content Include="Areas\PrivateSite\Views\Article\ArticleList.cshtml" />
+    <Content Include="Areas\PrivateSite\Views\Brand\Index.cshtml" />
+    <Content Include="Areas\PrivateSite\Views\Comment\Detail.cshtml" />
+    <Content Include="Areas\PrivateSite\Views\Comment\Index.cshtml" />
+    <Content Include="Areas\PrivateSite\Views\Dashboard\Index.cshtml" />
+    <EntityDeploy Include="Models\Model1.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Model1.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\Model1.edmx.diagram">
+      <DependentUpon>Model1.edmx</DependentUpon>
+    </Content>
+    <None Include="packages.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\AllItem\Index.cshtml" />
+    <Content Include="Views\AllItem\_NoProductsPartial.cshtml" />
+    <Content Include="Views\AllItem\_ProductListPartial.cshtml" />
+    <Content Include="Views\ProductDetails\Index.cshtml" />
+    <Content Include="Views\ThanhToan\Error.cshtml" />
+    <Content Include="Views\ThanhToan\Index.cshtml" />
+    <Content Include="Views\ThanhToan\Payment.cshtml" />
+    <Content Include="Views\ThanhToan\Success.cshtml" />
+    <Content Include="Views\UserProfile\ChangePassword.cshtml" />
+    <Content Include="Views\UserProfile\Index.cshtml" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Areas\PrivateSite\Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>50594</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:50594/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
