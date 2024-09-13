@@ -15,6 +15,7 @@ namespace BanGiay.Controllers
         public ActionResult Index()
         {
             ViewData["dssp"] = db.SanPhams.ToList();
+            ViewData["dsbv"] = db.BaiViets.ToList();
             return View();
         }
 

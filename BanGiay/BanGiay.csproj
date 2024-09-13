@@ -1025,6 +1025,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AllItemController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\NewsController.cs" />
     <Compile Include="Controllers\ProductDetailsController.cs" />
     <Compile Include="Controllers\ThanhToanController.cs" />
     <Compile Include="Controllers\UserProfileController.cs" />
@@ -1223,6 +1224,7 @@
     <Content Include="Views\ThanhToan\Success.cshtml" />
     <Content Include="Views\UserProfile\ChangePassword.cshtml" />
     <Content Include="Views\UserProfile\Index.cshtml" />
+    <Content Include="Views\News\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

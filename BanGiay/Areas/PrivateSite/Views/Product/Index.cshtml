@@ -246,7 +246,7 @@ function Insert() {
                 <td><h6 class="fw-600 mb-1">${sp.maTH}</h6></td>
                 <td>
                     <button type="button" class="btn btn-primary" onclick="EditMovie(${sp.maSanPham})">Sửa</button>
-                    <button type="button" class="btn ${sp.trangthai == false ? "btn-primary" : "btn-danger"}" onclick="Status(${sp.maSanPham})">${sp.trangthai == false ? "Ẩn" : "Hiện"}</button>
+                    <button type="button" class="btn ${sp.trangthai == false ? "btn-danger" : "btn-success"}" onclick="Status(${sp.maSanPham})">${sp.trangthai == false ? "Ẩn" : "Hiện"}</button>
                     <button type="button" class="btn btn-danger m-1" onclick="DeleteMovie(${sp.maSanPham})">Xóa</button>
                 </td>
                 <td><div class="d-flex align-items-center gap-2"><span class="badge ${(sp.trangthai == true ? " bg-success" : "bg-danger")} rounded-3 fw-600">${sp.trangthai == true ? "Đang bán" : "Ẩn"}</span></div></td>

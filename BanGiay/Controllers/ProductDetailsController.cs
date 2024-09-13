@@ -28,7 +28,7 @@ namespace BanGiay.Controllers
                     return View(objmoviedetail);
                 }
                 else
-                {
+                {   
                     return HttpNotFound();
                 }
             }

@@ -105,9 +105,9 @@
                 <div id="product-list">
                     @Html.Partial("_ProductListPartial", Model)
                 </div>
-                <div class="pagination-container">
+                @*<div class="pagination-container">
                     @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
-                </div>
+                </div>*@
             </div>
         </div>
     </div>
