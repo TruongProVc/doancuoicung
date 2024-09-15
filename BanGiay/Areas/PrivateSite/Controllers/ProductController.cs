@@ -18,7 +18,7 @@ namespace BanGiay.Areas.PrivateSite.Controllers
         public ActionResult Index()
         {
                 ViewData["BrandList"] = db.ThHieux.ToList();
-               ViewData["CateList"] = db.DMucs.ToList();
+                ViewData["CateList"] = db.DMucs.ToList();
             var products = db.SanPhams.ToList();
             if (products == null)
             {
@@ -168,6 +168,8 @@ namespace BanGiay.Areas.PrivateSite.Controllers
                     d.giaTien,
                     d.soLuong,
                     d.trangthai,
+                    d.maDM,
+                    d.maTH
                  
                 }).FirstOrDefault(d => d.maSanPham == productId);
 

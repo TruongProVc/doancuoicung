@@ -3,18 +3,20 @@
 }
 <div class="container-fluid">
     <div class="row">
-        <div class="col-lg-6 d-flex align-items-stretch">
-            <div class="card w-100">
+        <!-- Phần danh sách thương hiệu ở trên và rộng ra -->
+        <div class="col-lg-12">
+            <div class="card">
                 <div class="card-body p-4">
-                    <div class="row">
-                        <div class="col-lg-6 col-md-6">
-                            <h5 class="card-title fw-600 mb-4">Danh sách thương hiệu</h5>
+                    <div class="row mb-4">
+                        <div class="col">
+                            <h5 class="card-title fw-600">Danh sách thương hiệu</h5>
                         </div>
-                        <div class="col-lg-6 col-md-6">
+                        <div class="col text-end">
+                            <!-- Bạn có thể thêm nút hoặc chức năng tìm kiếm ở đây nếu cần -->
                         </div>
                     </div>
                     <div class="table-responsive">
-                        <table class="table table-post text-nowrap mb-0 align-middle">
+                        <table class="table table-striped text-nowrap mb-0 align-middle">
                             <thead class="text-dark fs-4">
                                 <tr>
                                     <th>
@@ -31,43 +33,51 @@
                                     </th>
                                 </tr>
                             </thead>
-                            <tbody id="table_brand"></tbody>
+                            <tbody id="table_brand">
+                                <!-- Nội dung danh sách thương hiệu sẽ được chèn tại đây -->
+                            </tbody>
                         </table>
-                        <div id="messageNotFind" style="margin:auto;display:none; text-align:center;">Không tìm thấy</div>
+                        <div id="messageNotFind" class="text-center my-4" style="display:none;">Không tìm thấy</div>
                     </div>
-                    <div id="loading" class=" m-auto  mt-4"></div>
+                    <div id="loading" class="text-center my-4"></div>
                 </div>
-                <div class="card-tools p-5 pt-0 pb-0 m-auto" id="pagination"></div>
+                <div class="card-footer text-center" id="pagination">
+                    <!-- Điều hướng phân trang -->
+                </div>
             </div>
         </div>
-        <div class="col-lg-6">
+    </div>
+
+    <div class="row mt-4">
+        <!-- Phần form nhập thương hiệu nằm ở dưới -->
+        <div class="col-lg-12">
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title fw-semibold mb-4">Thương hiệu</h5>
-                    <div class="card">
-                        <div class="card-body">
-                            <form id="form_brand" method="post">
-                                <div class="mb-3">
-                                    <label class="form-label">Mã Thương hiệu</label>
-                                    <input class="form-control" id="idBrand" disabled />
-                                </div>
-                                <div class="mb-3">
-                                    <label class="form-label">Tên thương hiệu</label>
-                                    <input class="form-control" id="nameBrand" />
-                                </div>
-                                <div class="mb-3">
-                                    <label class="form-label">Mô tả</label>
-                                    <input class="form-control" id="descriptionBrand" />
-                                </div>
-                                <button type="submit" class="btn btn-primary mt-2">Lưu</button>
-                            </form>
+                    <h5 class="card-title fw-semibold mb-4">Chi tiết thương hiệu</h5>
+                    <form id="form_brand" method="post">
+                        <div class="mb-3">
+                            <label for="idBrand" class="form-label">Mã Thương hiệu</label>
+                            <input type="text" class="form-control" id="idBrand" disabled />
                         </div>
-                    </div>
+                        <div class="mb-3">
+                            <label for="nameBrand" class="form-label">Tên thương hiệu</label>
+                            <input type="text" class="form-control" id="nameBrand" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="descriptionBrand" class="form-label">Mô tả</label>
+                            <textarea class="form-control" id="descriptionBrand" rows="3"></textarea>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <button type="submit" class="btn btn-primary">Lưu</button>
+                            <a href="@Url.Action("Index", "Brand")" class="btn btn-outline-success">Reset Form</a>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
 
 @section scriptBrand {
     <script>
@@ -77,6 +87,7 @@
         $(document).ready(function () {
             InsertBrand();
             loadData("", 1, 3);
+            $('#idBrand').prop('disabled', false); // Đảm bảo trường ID có thể chỉnh sửa khi tạo mới
 
             $("#searchBrand").on("keyup", function () {
                 var keyword = $('#searchBrand').val();
@@ -146,7 +157,7 @@
                                 if (response.status) {
                                     loadData("", 1, 3);
                                     $('#form_brand')[0].reset();
-                                    $('#idBrand').prop('disabled', false);
+                                    $('#idBrand').prop('disabled', false); // Đặt lại trạng thái có thể chỉnh sửa khi tạo mới
                                 }
                             });
                         },
@@ -218,7 +229,7 @@
                 data: { id: id },
                 success: function (response) {
                     if (response.status) {
-                        $('#idBrand').val(response.data.maTH).prop('disabled', true);
+                        $('#idBrand').val(response.data.maTH).prop('disabled', true); // Vô hiệu hóa trường ID khi chỉnh sửa
                         $('#nameBrand').val(response.data.tenTH);
                         $('#descriptionBrand').val(response.data.moTa);
                     } else {

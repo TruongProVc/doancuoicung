@@ -8,9 +8,60 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-lg-12 ">
+            <div class="col-lg-12 d-flex align-items-stretch">
+                <div class="card w-100">
+                    <div class="card-body p-4">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6">
+                                <h5 class="card-title fw-600 mb-4">Danh sách phim</h5>
+                            </div>
+                            <div class="col-lg-6 col-md-6">
+                                <input class="form-control" placeholder="Tìm kiếm ..." id="searchMovie" />
+                            </div>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table table-post text-nowrap mb-0 align-middle">
+                                <thead class="text-dark fs-4">
+                                    <tr>
+                                        <th class="">
+                                            <h6 class="fw-600 mb-0">Mã sản phẩm</h6>
+                                        </th>
+                                        <th class="">
+                                            <h6 class="fw-600 mb-0">Tên Sản phẩm</h6>
+                                        </th>
+                                        <th class="">
+                                            <h6 class="fw-600 mb-0">Giá tiền</h6>
+                                        </th>
+                                        <th class="">
+                                            <h6 class="fw-600 mb-0">mô tả</h6>
+                                        </th>
+                                        <th class="">
+                                            <h6 class="fw-600 mb-0">Danh mục</h6>
+                                        </th>
+                                        <th class="">
+                                            <h6 class="fw-600 mb-0">Thương hiệu</h6>
+                                        </th>
+                                        <th class="">
+                                            <h6 class="fw-600 mb-0">Lệnh</h6>
+                                        </th>
+                                        <th class="">
+                                            <h6 class="fw-600 mb-0">Trạng thái</h6>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tbody_Movie"></tbody>
+                            </table>
+                            <div id="messageNotFind" style="margin:auto;display:none; text-align:center;">Không tìm thấy</div>
+                        </div>
+                        <div id="loading" class=" m-auto  mt-4"></div>
+                    </div>
+                    <div class="card-tools p-5 pt-0 pb-0 m-auto" id="pagination"></div>
+                </div>
+            </div>
             <div class="card">
+
                 <div class="card-body">
-                    <h5 class="card-title fw-semibold mb-4">Thêm phim <a href="/PrivateSite/Movie/Index">Reset form</a></h5>
+                    <h5 class="card-title fw-semibold mb-4">Thêm sản phẩm <a href="/PrivateSite/Movie/Index"></a></h5>
                     <div class="card">
                         <div class="card-body">
                             <form id="formProduct" enctype="multipart/form-data">
@@ -40,7 +91,7 @@
                                 <div class="row mb-3">
                                     <div class="col-6">
                                         <label class="form-label">Thương hiệu</label>
-                                        <select class="form-control" id="selectCountry" name="brand">
+                                        <select class="form-control" id="brand" name="brand">
                                             @foreach (var item in brandList)
                                             {
                                                 <option value="@item.maTH">@item.tenTH</option>
@@ -49,7 +100,7 @@
                                     </div>
                                     <div class="col-6">
                                         <label class="form-label">Danh mục</label>
-                                        <select class="form-control" id="selectCountry" name="category">
+                                        <select class="form-control" id="category" name="category">
                                             @foreach (var item in catelist)
                                             {
                                                 <option value="@item.maDM">@item.maDM</option>
@@ -65,56 +116,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-12 d-flex align-items-stretch">
-            <div class="card w-100">
-                <div class="card-body p-4">
-                    <div class="row">
-                        <div class="col-lg-6 col-md-6">
-                            <h5 class="card-title fw-600 mb-4">Danh sách phim</h5>
-                        </div>
-                        <div class="col-lg-6 col-md-6">
-                            <input class="form-control" placeholder="Tìm kiếm ..." id="searchMovie" />
-                        </div>
-                    </div>
-                    <div class="table-responsive">
-                        <table class="table table-post text-nowrap mb-0 align-middle">
-                            <thead class="text-dark fs-4">
-                                <tr>
-                                    <th class="">
-                                        <h6 class="fw-600 mb-0">Mã sản phẩm</h6>
-                                    </th>
-                                    <th class="">
-                                        <h6 class="fw-600 mb-0">Tên Sản phẩm</h6>
-                                    </th>
-                                    <th class="">
-                                        <h6 class="fw-600 mb-0">Giá tiền</h6>
-                                    </th>
-                                    <th class="">
-                                        <h6 class="fw-600 mb-0">mô tả</h6>
-                                    </th>
-                                    <th class="">
-                                        <h6 class="fw-600 mb-0">Danh mục</h6>
-                                    </th>
-                                    <th class="">
-                                        <h6 class="fw-600 mb-0">Thương hiệu</h6>
-                                    </th>
-                                    <th class="">
-                                        <h6 class="fw-600 mb-0">Lệnh</h6>
-                                    </th>
-                                    <th class="">
-                                        <h6 class="fw-600 mb-0">Trạng thái</h6>
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody id="tbody_Movie"></tbody>
-                        </table>
-                        <div id="messageNotFind" style="margin:auto;display:none; text-align:center;">Không tìm thấy</div>
-                    </div>
-                    <div id="loading" class=" m-auto  mt-4"></div>
-                </div>
-                <div class="card-tools p-5 pt-0 pb-0 m-auto" id="pagination"></div>
-            </div>
-        </div>
+       
     </div>
 </div>
 
@@ -161,8 +163,8 @@
                 $('#Price').val(data.giaTien);
 
                 // Set select options
-                $('#selectCountry').val(data.maThuongHieu); // Brand
-                $('#selectCate').val(data.maDanhMuc); // Category
+                $('#brand').val(data.maTH); // Brand
+                $('#category').val(data.maDM); // Category
             } else {
                 alert('Không tìm thấy sản phẩm!');
             }

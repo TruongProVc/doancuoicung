@@ -5,59 +5,11 @@
 }
 <div class="container-fluid">
     <div class="row">
+        <!-- Phần danh sách bài viết ở trên và rộng ra -->
         <div class="col-lg-12">
-            <div class="container-fluid">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title fw-semibold mb-4">Thêm bài viết <a href="@Url.Action("ArticleList","Article")">Reset Form</a></h5>
-                        <div class="card">
-                            <div class="card-body">
-                                <form id="insertArticle" enctype="multipart/form-data">
-                                    @Html.AntiForgeryToken()
-                                    <div class="mb-3">
-                                        <input type="hidden" name="id" id="id" />
-                                        <p class="c-green" id="alert_Edit" style="font-weight:bold;"></p>
-                                        <label class="form-label">Tên bài viết</label>
-                                        <input type="text" class="form-control" name="articleName" id="name" />
-                                    </div>
-                                    <div class="mb-3">
-                                        <label class="form-label">Nội dung tóm tắt</label>
-                                        <textarea class="form-control" name="summaryContent" id="sContent"></textarea>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label class="form-label">Nội dung Chính</label>
-                                        <textarea class="form-control" name="content" id="content1"></textarea>
-                                    </div>
-                                    <div class="mb-3 ">
-                                        <label class="form-label">Hình bài viết</label>
-                                        <div class="custom-file">
-                                            <input type="file" class="custom-file-input" id="imgArticle" name="avatarArticle">
-                                        </div>
-                                        <div id="imagePreviewSingle" min-height="120px" min-width="120px" class="m-auto"></div>
-                                    </div>
-                                    <div class="row mb-3">
-                                        <div class="col-6">
-                                            <label class="form-label">Tài khoản đăng</label>
-                                            @*<input class="form-control" type="text" value="@account.email" disabled />*@
-                                        </div>
-                                        <div class="col-6">
-                                            <label class="form-label">Thời gian đăng</label>
-                                            <input type="text" class="form-control" value="@DateTime.Now" disabled>
-                                        </div>
-                                    </div>
-                                    <button type="submit" id="btnSubmit" class="btn btn-primary mt-2">Lưu bài viết</button>
-                                </form>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-12 d-flex align-items-stretch">
             <div class="card w-100">
                 <div class="card-body p-4">
-                    <div class="row">
+                    <div class="row mb-4">
                         <div class="col-lg-6 col-md-6">
                             <h5 class="card-title fw-600 mb-4">Danh sách bài viết</h5>
                         </div>
@@ -69,22 +21,22 @@
                         <table class="table table-post text-nowrap mb-0 align-middle">
                             <thead class="text-dark fs-4">
                                 <tr>
-                                    <th class="">
+                                    <th>
                                         <h6 class="fw-600 mb-0">Id</h6>
                                     </th>
-                                    <th class="">
+                                    <th>
                                         <h6 class="fw-600 mb-0">Tên bài viết</h6>
                                     </th>
-                                    <th class="">
+                                    <th>
                                         <h6 class="fw-600 mb-0">Người đăng</h6>
                                     </th>
-                                    <th class="">
+                                    <th>
                                         <h6 class="fw-600 mb-0">Lượt xem</h6>
                                     </th>
-                                    <th class="">
+                                    <th>
                                         <h6 class="fw-600 mb-0">Lệnh</h6>
                                     </th>
-                                    <th class="">
+                                    <th>
                                         <h6 class="fw-600 mb-0">Trạng thái</h6>
                                     </th>
                                 </tr>
@@ -93,13 +45,62 @@
                         </table>
                         <div id="messageNotFind" style="margin:auto;display:none; text-align:center;">Không tìm thấy</div>
                     </div>
-                    <div id="loading" class=" m-auto  mt-4"></div>
+                    <div id="loading" class="m-auto mt-4"></div>
                 </div>
-                <div class="card-tools p-5 pt-0 pb-0 m-auto" id="pagination"></div>
+                <div class="card-footer text-center p-5 pt-0 pb-0 m-auto" id="pagination"></div>
+            </div>
+        </div>
+
+        <!-- Phần form nhập bài viết nằm ở dưới -->
+        <div class="col-lg-12 mt-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title fw-semibold mb-4">Thêm bài viết</h5>                        
+                    <a href="@Url.Action("ArticleList", "Article")" class="btn btn-outline-success">Reset Form</a>
+
+                    <form id="insertArticle" enctype="multipart/form-data">
+                        @Html.AntiForgeryToken()
+                        <div class="mb-3">
+                            <input type="hidden" name="id" id="id" />
+                            <p class="c-green" id="alert_Edit" style="font-weight:bold;"></p>
+                            <label class="form-label">Tên bài viết</label>
+                            <input type="text" class="form-control" name="articleName" id="name" />
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Nội dung tóm tắt</label>
+                            <textarea class="form-control" name="summaryContent" id="sContent"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Nội dung Chính</label>
+                            <textarea class="form-control" name="content" id="content1"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Hình bài viết</label>
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" id="imgArticle" name="avatarArticle">
+                            </div>
+                            <div id="imagePreviewSingle" style="min-height: 120px; min-width: 120px;" class="m-auto"></div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-6">
+                                <label class="form-label">Tài khoản đăng</label>
+                                @*<input class="form-control" type="text" value="@account.email" disabled />*@
+                            </div>
+                            <div class="col-6">
+                                <label class="form-label">Thời gian đăng</label>
+                                <input type="text" class="form-control" value="@DateTime.Now" disabled>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <button type="submit" id="btnSubmit" class="btn btn-primary">Lưu bài viết</button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
 </div>
+
 <script src="https://cdn.tiny.cloud/1/s41gi5sbzh6py5mxh7lfqah6eujl6z62rk3tyco0xyklvsd0/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
 
 @section scriptArticleList{
